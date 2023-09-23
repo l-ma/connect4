@@ -31,6 +31,10 @@ public class Board {
      * @return true if the spot (x, y) does not already contain a piece in it, false otherwise
      */
     public boolean isValidMove(int x, int y) {
+        if (x >= NUM_ROW || y >= NUM_COL) {
+            return false;
+        }
+        
         if (board[x][y].isEmpty()) {
             return true;
         }
