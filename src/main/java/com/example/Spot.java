@@ -15,7 +15,6 @@ public class Spot {
     public Spot(int x, int y) {
         xCoord = x;
         yCoord = y;
-        isEmpty = true;
         pieceType = Piece.CLEAR;
     }
 
@@ -39,7 +38,7 @@ public class Spot {
      * @return true is the spot does not have a piece in it
      */
     public boolean isEmpty() {
-        return isEmpty;
+        return pieceType == Piece.CLEAR;
     }
 
     /**
