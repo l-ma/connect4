@@ -24,14 +24,14 @@ public class Board {
      * @param pieceDropped the type of piece dropped
      * @return true if the move succeeded, false otherwise
      */
-    public boolean dropPiece(int x, int y, Piece pieceDropped) {
+    public boolean makeMove(int x, int y, Piece pieceDropped) {
         if (!isValidMove(x, y)) {
-            return false;
+            throw new RuntimeException("Not a valid spot");
         }
         if (board[x][y].updateSpot(pieceDropped)) {
             return true;
         }
-        return false;
+        throw new RuntimeException("droppping clear");
     }
 
     /**
@@ -144,5 +144,18 @@ public class Board {
 
     public int getNumCol() {
         return NUM_COL;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < NUM_ROW; i++) {
+            for (int j = 0; j < NUM_COL; j++) {
+                result += board[i][j];
+                result += " ";
+            }
+            result += "\n";
+        }
+        return result;
     }
 }
