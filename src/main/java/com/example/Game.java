@@ -1,20 +1,44 @@
 package com.example;
 
+import java.util.Random;
+
 public class Game {
     private Player player1;
     private Player player2;
     private Player turn;
     private Player winner;
     private Board board;
-    private Display display;
+    Random r = new Random();
 
-    public Game(Player player1, Player player2, Display displayType) {
-        this.player1 = player1;
-        this.player2 = player2;
-        // this.turn = pick randomly between the players;
+    public Game(PlayerType p1, PlayerType p2) {
+        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1) : new Computer();
+        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2) : new Computer();
+        this.turn = (System.currentTimeMillis() % 2 == 1) ? this.player1 : this.player2;
         this.winner = null;
         this.board = new Board();
-        this.display = displayType;
+    }
+
+    private void changeTurn() {
+        turn = (turn == player1) ? player2 : player1;
+    }
+
+    public void makeMove(int x, int y) {
+        board.makeMove(x, y, turn.getPieceColor());
+        if (hasWinner(x, y)) {
+            winner = turn;
+        }
+        changeTurn();
+    }
+
+    public boolean hasWinner() {
+        for (int x = 0; x < board.getNumRow(); x++) {
+            for (int y = 0; y < board.getNumCol(); y++) {
+                if (hasWinner(x, y)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -23,79 +47,40 @@ public class Game {
      * @param y the y-coordinate of the checker
      */
     public boolean hasWinner(int x, int y) {
-        Spot droppedSpot = board.getSpot(x,y);
-        Piece piece = droppedSpot.getPieceType();
-
-        // Check for horizontal win
-        int count = 0;
-        for (int col = Math.max(0, y - 3); col <= Math.min(board.getNumCol() - 1, y + 3); col++) {
-            if (board.getSpot(x, col).getPieceType() == piece) {
-                count++;
-                if (count == 4) {
-                    return true;
-                }
-            } else {
-                count = 0;
-            }
-        }
-
-        // Check for vertical win
-        count = 0;
-        for (int row = Math.max(0, x - 3); row <= Math.min(board.getNumRow() - 1, x + 3); row++) {
-            if (board.getSpot(row, y).getPieceType() == piece) {
-                count++;
-                if (count == 4) {
-                    return true;
-                }
-            } else {
-                count = 0;
-            }
-        }
-
-        // Check for diagonal win (from top-left to bottom-right)
-        count = 0;
-        int rowStart = Math.max(0, x - 3);
-        int colStart = Math.max(0, y - 3);
-        int rowEnd = Math.min(board.getNumRow() - 1, x + 3);
-        int colEnd = Math.min(board.getNumCol() - 1, y + 3);
-        for (int row = rowStart, col = colStart; row <= rowEnd && col <= colEnd; row++, col++) {
-            if (board.getSpot(x, col).getPieceType() == piece) {
-                count++;
-                if (count == 4) {
-                    return true;
-                }
-            } else {
-                count = 0;
-            }
-        }
-
-        // Check for diagonal win (from top-right to bottom-left)
-        count = 0;
-        rowStart = Math.max(0, x - 3);
-        colStart = Math.min(board.getNumCol() - 1, y + 3);
-        rowEnd = Math.min(board.getNumRow() - 1, x + 3);
-        colEnd = Math.max(0, y - 3);
-        for (int row = rowStart, col = colStart; row <= rowEnd && col >= colEnd; row++, col--) {
-            if (board.getSpot(x, col).getPieceType() == piece) {
-                count++;
-                if (count == 4) {
-                    return true;
-                }
-            } else {
-                count = 0;
-            }
-        }
-
-        return false;
+        return board.hasWinner(x, y);
     }
 
     /**
-     * The game end, reset all fields
+     * Ends the current game, but is ready for another round to be played
      */
-    public void endGame(){
+    public void newRound() {
         winner = null;
         board.resetBoard();
     }
 
+    public int getWinnerId() {
+        if (getWinner() == null) {
+            throw new NullPointerException("There is no winner yet");
+        }
+        return winner.getPlayerId();
+    }
 
+    public int getTurnId() {
+        if (turn == null) {
+            throw new NullPointerException("There is no turn yet");
+        }
+        return turn.getPlayerId();
+    }
+
+    public Player getWinner() {
+        if (hasWinner()) {
+            return winner;
+        }
+        throw new NullPointerException("There is no winner yet");
+    }
+
+    @Override
+    public String toString() {
+        return board.toString();
+    }
 }

@@ -2,8 +2,13 @@ package com.example;
 
 import java.util.Scanner;
 
-public class Human extends Player{
+public class Human extends Player {
     Scanner input = new Scanner(System.in);
+
+    public Human(int playerId) {
+        super(playerId);
+    }
+
     public int[] dropChecker() {
         System.out.println("Please enter the row number: ");
         int row = input.nextInt();
