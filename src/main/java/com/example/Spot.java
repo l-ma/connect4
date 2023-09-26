@@ -3,7 +3,6 @@ package com.example;
 public class Spot {
     private int xCoord;
     private int yCoord;
-    private boolean isEmpty;
     private Piece pieceType;
 
     /**
@@ -25,7 +24,7 @@ public class Spot {
      * @return true is the update succeeded, false otherwise
      */
     public boolean updateSpot(Piece piece) {
-        if (pieceType != Piece.CLEAR) {
+        if (piece == Piece.CLEAR) {
             return false;
         }
         pieceType = piece;
@@ -66,5 +65,16 @@ public class Spot {
      */
     public Piece getPieceType() {
         return pieceType;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        if (pieceType != Piece.CLEAR) {
+            result += (pieceType == Piece.RED) ? "r" : "y";
+        } else {
+            result += ".";
+        }
+        return result;
     }
 }
