@@ -8,7 +8,7 @@ public class Board {
     /**
      * Constructor of the board, initialize each spot
      */
-    Board() {
+    public Board() {
         for (int i = 0; i < NUM_ROW; i++) {
             for (int j = 0; j < NUM_COL; j++) {
                 board[i][j] = new Spot(i, j);
@@ -48,12 +48,78 @@ public class Board {
         if (!board[x][y].isEmpty()) {
             return false;
         }
-        for (int i = 0; i < x; i++) {
+        for (int i = x + 1; i < NUM_ROW; i++) {
             if (board[i][y].isEmpty()) {
                 return false;
             }
         }
         return true;
+    }
+
+    public boolean hasWinner(int x, int y) {
+        Spot droppedSpot = getSpot(x,y);
+        Piece piece = droppedSpot.getPieceType();
+        // Check for horizontal win
+        int count = 0;
+        for (int col = Math.max(0, y - 3); col <= Math.min(NUM_COL - 1, y + 3); col++) {
+            if (piece != Piece.CLEAR && getSpot(x, col).getPieceType() == piece) {
+                count++;
+                if (count == 4) {
+                    return true;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        // Check for vertical win
+        count = 0;
+        for (int row = Math.max(0, x - 3); row <= Math.min(NUM_ROW - 1, x + 3); row++) {
+            if (piece != Piece.CLEAR && getSpot(row, y).getPieceType() == piece) {
+                count++;
+                if (count == 4) {
+                    return true;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        // Check for diagonal win (from top-left to bottom-right)
+        count = 0;
+        int rowStart = Math.max(0, x - 3);
+        int colStart = Math.max(0, y - 3);
+        int rowEnd = Math.min(NUM_ROW - 1, x + 3);
+        int colEnd = Math.min(NUM_COL - 1, y + 3);
+        for (int row = rowStart, col = colStart; row <= rowEnd && col <= colEnd; row++, col++) {
+            if (piece != Piece.CLEAR && getSpot(x, col).getPieceType() == piece) {
+                count++;
+                if (count == 4) {
+                    return true;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        // Check for diagonal win (from top-right to bottom-left)
+        count = 0;
+        rowStart = Math.max(0, x - 3);
+        colStart = Math.min(NUM_COL - 1, y + 3);
+        rowEnd = Math.min(NUM_ROW - 1, x + 3);
+        colEnd = Math.max(0, y - 3);
+        for (int row = rowStart, col = colStart; row <= rowEnd && col >= colEnd; row++, col--) {
+            if (piece != Piece.CLEAR && getSpot(x, col).getPieceType() == piece) {
+                count++;
+                if (count == 4) {
+                    return true;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        return false;
     }
 
     /**
