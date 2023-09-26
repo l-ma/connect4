@@ -6,6 +6,17 @@ public class Board {
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
 
     /**
+     * Constructor of the board, initialize each spot
+     */
+    Board() {
+        for (int i = 0; i < NUM_ROW; i++) {
+            for (int j = 0; j < NUM_COL; j++) {
+                board[i][j] = new Spot(i, j);
+            }
+        }
+    }
+
+    /**
      * Drop a piece to the board
      *
      * @param x the x-coordinate of the spot where the piece will be dropped
@@ -43,5 +54,29 @@ public class Board {
             }
         }
         return true;
+    }
+
+    /**
+     * Reset the board, set each spot in the board to be Piece.CLEAR
+     */
+    public void resetBoard() {
+        for (int i = 0; i < NUM_ROW; i++) {
+            for (int j = 0; j < NUM_COL; j++) {
+                Spot spot = board[i][j];
+                spot.updateSpot(Piece.CLEAR);
+            }
+        }
+    }
+
+    public Spot getSpot(int x, int y) {
+        return board[x][y];
+    }
+
+    public int getNumRow() {
+        return NUM_ROW;
+    }
+
+    public int getNumCol() {
+        return NUM_COL;
     }
 }
