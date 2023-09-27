@@ -31,8 +31,8 @@ public class Game {
     /**
      * Drops a piece in the specified position
      *
-     * @param x the x-coordinate for the spot to drop a piece
-     * @param y the y-coordinate for the spot to drop a piece
+     * @param x the x-coordinate of the spot where the piece will be dropped
+     * @param y the y-coordinate of the spot where the piece will be dropped
      */
     public void dropPiece(int x, int y) {
         board.dropPiece(x, y, turn.getPieceColor());
@@ -48,8 +48,8 @@ public class Game {
      * @return true if either play has successfully won the game
      */
     public boolean hasWinner() {
-        for (int x = 0; x < board.getNumRow(); x++) {
-            for (int y = 0; y < board.getNumCol(); y++) {
+        for (int x = 0; x < board.getNumOfRows(); x++) {
+            for (int y = 0; y < board.getNumOfCols(); y++) {
                 if (hasWinner(x, y)) {
                     return true;
                 }
