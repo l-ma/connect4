@@ -6,7 +6,7 @@ public class Board {
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
 
     /**
-     * Constructor of the board, initialize each spot
+     * Creates a new instance of a Connect 4 {@code Board}
      */
     public Board() {
         for (int i = 0; i < NUM_ROW; i++) {
@@ -17,14 +17,14 @@ public class Board {
     }
 
     /**
-     * Drop a piece to the board
+     * Drops a piece into the board
      *
      * @param x the x-coordinate of the spot where the piece will be dropped
      * @param y the y-coordinate of the spot where the piece will be dropped
      * @param pieceDropped the type of piece dropped
-     * @return true if the move succeeded, false otherwise
+     * @return true if the move succeeds, false otherwise
      */
-    public boolean makeMove(int x, int y, Piece pieceDropped) {
+    public boolean dropPiece(int x, int y, Piece pieceDropped) {
         if (!isValidMove(x, y)) {
             throw new RuntimeException("Not a valid spot");
         }
@@ -39,7 +39,7 @@ public class Board {
      *
      * @param x the x-coordinate of the potential move
      * @param y the y-coordinate of the potential move
-     * @return true if the spot (x, y) does not already contain a piece in it, false otherwise
+     * @return true if the spot (x, y) is a valid spot according to the rules of Connect 4, false otherwise
      */
     public boolean isValidMove(int x, int y) {
         if (x < 0 || y < 0 || x >= NUM_ROW || y >= NUM_COL) {
@@ -56,6 +56,17 @@ public class Board {
         return true;
     }
 
+    private Spot getSpot(int x, int y) {
+        return board[x][y];
+    }
+
+    /**
+     * Checks if there is a winning piece configuration at a specific position in the board
+     *
+     * @param x the x-coordinate of the potential winning configuration
+     * @param y the x-coordinate of the potential winning configuration
+     * @return true if there is a winning configuration, false otherwise
+     */
     public boolean hasWinner(int x, int y) {
         Spot droppedSpot = getSpot(x,y);
         Piece piece = droppedSpot.getPieceType();
@@ -123,7 +134,7 @@ public class Board {
     }
 
     /**
-     * Reset the board, set each spot in the board to be Piece.CLEAR
+     * Resets the board by removing all pieces currently dropped
      */
     public void resetBoard() {
         for (int i = 0; i < NUM_ROW; i++) {
@@ -134,15 +145,21 @@ public class Board {
         }
     }
 
-    public Spot getSpot(int x, int y) {
-        return board[x][y];
-    }
-
-    public int getNumRow() {
+    /**
+     * Gets the number of rows on the board
+     *
+     * @return number of rows
+     */
+    public int getNumOfRows() {
         return NUM_ROW;
     }
 
-    public int getNumCol() {
+    /**
+     * Gets the number of columns on the board
+     *
+     * @return number of columns
+     */
+    public int getNumOfCols() {
         return NUM_COL;
     }
 

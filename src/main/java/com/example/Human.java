@@ -4,14 +4,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Human extends Player {
-    Scanner input = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
     public Human(int playerId) {
         super(playerId);
     }
 
-    public int[] makeMove() {
-        System.out.println("Where do you want to drop your piece?");
+    public int[] dropPiece() {
+        System.out.println("Player " + super.getPlayerId() + ": where do you want to drop your piece?");
         int row = input.nextInt();
         int col = input.nextInt();
         return new int[]{row, col};
