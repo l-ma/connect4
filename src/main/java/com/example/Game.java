@@ -1,14 +1,11 @@
 package com.example;
 
-import java.util.Random;
-
 public class Game {
     private Player player1;
     private Player player2;
     private Player turn;
     private Player winner;
     private Board board;
-    Random r = new Random();
 
     /**
      * Creates a new instance of a Connect 4 Game
@@ -29,13 +26,13 @@ public class Game {
     }
 
     /**
-     * Drops a piece in the specified position
+     * Drops a checker in the specified position
      *
-     * @param x the x-coordinate of the spot where the piece will be dropped
-     * @param y the y-coordinate of the spot where the piece will be dropped
+     * @param x the x-coordinate of the spot where the checker will be dropped
+     * @param y the y-coordinate of the spot where the checker will be dropped
      */
-    public void dropPiece(int x, int y) {
-        board.dropPiece(x, y, turn.getPieceColor());
+    public void dropChecker(int x, int y) {
+        board.dropChecker(x, y, turn.getCheckerColor());
         if (hasWinner(x, y)) {
             winner = turn;
         }
@@ -90,19 +87,6 @@ public class Game {
     }
 
     /**
-     * Gets the id of the player whose turn it is
-     *
-     * @return id for the player
-     * @throws RuntimeException if there is no player whose turn it is
-     */
-    public int getTurnId() {
-        if (turn == null) {
-            throw new RuntimeException("There is no turn yet");
-        }
-        return turn.getPlayerId();
-    }
-
-    /**
      * Gets the player who has won the game
      *
      * @return the winning player
@@ -128,6 +112,10 @@ public class Game {
         return winner.getPlayerId();
     }
 
+    /**
+     * Gets the player who currently takes the turn
+     * @return Player play who is in turn
+     */
     public Player getTurn() {
         return turn;
     }

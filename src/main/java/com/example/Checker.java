@@ -1,6 +1,6 @@
 package com.example;
 
-public enum Piece {
+public enum Checker {
     /**
      * A red piece
      */
