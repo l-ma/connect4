@@ -1,5 +1,8 @@
 package com.example;
 
+/**
+ * Represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries to make a straight line (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid. A randomly-chosen player plays first, with players alternating thereafter. If the same players play multiple games in a row, they generally take turns playing first.
+ */
 public class Game {
     private Player player1;
     private Player player2;
@@ -42,7 +45,7 @@ public class Game {
     /**
      * Checks if a player has won the game
      *
-     * @return true if either play has successfully won the game
+     * @return true if either player has successfully won the game
      */
     public boolean hasWinner() {
         for (int x = 0; x < board.getNumOfRows(); x++) {
@@ -60,6 +63,7 @@ public class Game {
      * 
      * @param x the x-coordinate of the spot to be checked
      * @param y the y-coordinate of the spot to be checked
+     * @return true if either player has successfully won the game
      */
     public boolean hasWinner(int x, int y) {
         return board.hasWinner(x, y);
@@ -90,7 +94,7 @@ public class Game {
      * Gets the player who has won the game
      *
      * @return the winning player
-     * @throws RuntimeExecption if there is no winner
+     * @throws RuntimeException if there is no winner
      */
     public Player getWinner() {
         if (hasWinner()) {
@@ -103,7 +107,7 @@ public class Game {
      * Gets the id for the player who has won the game
      *
      * @return the id of the winning player
-     * @throws RuntimeExecption if there is no winner
+     * @throws RuntimeException if there is no winner
      */
     public int getWinnerId() {
         if (getWinner() == null) {

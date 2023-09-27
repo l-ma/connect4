@@ -1,11 +1,14 @@
 package com.example;
 
+/**
+ * Represents a board in a game of Connect 4. Each spot in the board starts by having no checker, and as a game progresses, more spots get filled as players drop their respective checkers.
+ */
 public class Board {
     /**
      * Number of rows in the board
      */
     public static final int NUM_ROW = 6;
-    
+
     /**
      * Number of columns in the board
      */

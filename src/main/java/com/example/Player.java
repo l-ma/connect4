@@ -1,11 +1,14 @@
 package com.example;
 
+/**
+ * Represents a player in Connect 4.
+ */
 public abstract class Player {
     private int playerId;
     private Checker color;
 
     /**
-     * Creates a new {@Player} with a specified player id
+     * Creates a new {@code Player} with a specified player id
      *
      * @param playerId the player id for the player being created
      */
@@ -15,7 +18,7 @@ public abstract class Player {
     }
 
     /**
-     * Creates a new {@Player}
+     * Creates a new {@code Player}
      */
     public Player() {
         if (playerId % 2 == 0) {

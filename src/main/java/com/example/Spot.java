@@ -1,5 +1,8 @@
 package com.example;
 
+/**
+ * Represents a spot on a board of Connect 4.
+ */
 public class Spot {
     private int xCoord;
     private int yCoord;

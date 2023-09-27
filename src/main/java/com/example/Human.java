@@ -2,19 +2,21 @@ package com.example;
 
 import java.util.Scanner;
 
-
+/**
+ * Represents a player which is a human. This human player can play against another human player or a computer player.
+ */
 public class Human extends Player {
     Scanner input = new Scanner(System.in);
 
     /**
-     * Creates a new instance of a {@code Human}
+     * Creates a new instance of a {@code Human} with a specified player id
      *
      * @param playerId id of a human player
      */
     public Human(int playerId) {
         super(playerId);
     }
-    
+
     /**
      * Gets coordinates to drop a checker in some position on the board
      *

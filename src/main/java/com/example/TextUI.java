@@ -2,12 +2,15 @@ package com.example;
 
 import java.util.Scanner;
 
+/**
+ * Example text based client for playing Connect 4. When a human player plays, they are asked to first input an x-coordinate and then a y-coordinate for the spot they want to drop a piece into.
+ */
 public class TextUI {
     private Game game;
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Creates a new {@link UI} instance that reads moves from the command line
+     * Creates a new {@code UI} instance that reads moves from the command line
      */
     public TextUI() {
         beginGame();
@@ -72,9 +75,5 @@ public class TextUI {
                 return;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new TextUI().playGame();
     }
 }
