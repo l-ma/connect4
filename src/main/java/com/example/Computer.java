@@ -3,9 +3,13 @@ package com.example;
 import java.util.Random;
 
 public class Computer extends Player {
+    public Computer(int playerId) {
+        super(playerId);
+    }
     /**
-     * A computer produce the position to drop a checker
-     * @return int[] that contains[row, col]
+     * Gets coordinates to drop a checker in some position on the board
+     *
+     * @return int[] that contains [row, col] which are the coordinates for the drop spot
      */
     public int[] dropChecker() {
         Random random = new Random();

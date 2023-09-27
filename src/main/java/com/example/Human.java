@@ -1,6 +1,5 @@
 package com.example;
 
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -8,15 +7,17 @@ public class Human extends Player {
     Scanner input = new Scanner(System.in);
 
     /**
-     * Constructor of a human
-     * @param playerId id of a human
+     * Creates a new instance of a {@code Human}
+     *
+     * @param playerId id of a human player
      */
     public Human(int playerId) {
         super(playerId);
     }
     /**
-     * A Human input the position to drop a checker
-     * @return int[] that contains[row, col]
+     * Gets coordinates to drop a checker in some position on the board
+     *
+     * @return int[] that contains [row, col] which are the coordinates for the drop spot
      */
     public int[] dropChecker() {
         System.out.println("Player " + super.getPlayerId() + ": where do you want to drop your piece?");

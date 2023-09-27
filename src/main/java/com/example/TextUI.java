@@ -38,7 +38,7 @@ public class TextUI {
             }
         }
         while (true) {
-            System.out.println("Player 1 is a [human, computer]: ");
+            System.out.println("Player 2 is a [human, computer]: ");
             p2 = readString();
             if (!(p2.equals("human") || p2.equals("computer"))) {
                 System.out.println("Not a valid input, player must be a human or computer. Please try again.");
@@ -79,17 +79,14 @@ public class TextUI {
         return response;
     }
 
-    /**
-     * Drop a checker
-     */
     private void dropChecker() {
         while (true) {
             int[] position;
-            if (game.getTurn() instanceof Human) {
-                Human humanPlayer = (Human)game.getTurn();
+            if (game.getTurnPlayer() instanceof Human) {
+                Human humanPlayer = (Human)game.getTurnPlayer();
                 position = humanPlayer.dropChecker();
             } else {
-                Computer computerPlayer = (Computer) game.getTurn();
+                Computer computerPlayer = (Computer) game.getTurnPlayer();
                 position = computerPlayer.dropChecker();
             }
             int row = position[0];
@@ -104,12 +101,18 @@ public class TextUI {
     }
 
     /**
-     * Runs a game until one player wins/the other player loses
+     * Runs a game until one player wins
      */
     public void playGame() {
         System.out.println(game.toString());
         while (true) {
-            game.getTurnPlayer().dropChecker();
+            int[] res = game.getTurnPlayer().dropChecker();
+            try {
+                game.dropChecker(res[0], res[1]);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
             System.out.println(game.toString());
             if (game.hasWinner()) {
                 System.out.println("Congrats! Player " + game.getWinnerId() + " has won");

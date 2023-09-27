@@ -14,8 +14,8 @@ public class Game {
      * @param p2 the type of the second player (human or computer)
      */
     public Game(PlayerType p1, PlayerType p2) {
-        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1) : new Computer();
-        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2) : new Computer();
+        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1) : new Computer(1);
+        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2) : new Computer(2);
         this.turn = (System.currentTimeMillis() % 2 == 1) ? this.player1 : this.player2;
         this.winner = null;
         this.board = new Board();
@@ -110,14 +110,6 @@ public class Game {
             throw new RuntimeException("There is no winner yet");
         }
         return winner.getPlayerId();
-    }
-
-    /**
-     * Gets the player who currently takes the turn
-     * @return Player play who is in turn
-     */
-    public Player getTurn() {
-        return turn;
     }
 
     @Override
