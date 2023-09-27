@@ -1,13 +1,11 @@
 package com.example;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class TextUI {
     private Game game;
     private Scanner sc = new Scanner(System.in);
     private String[] inputs;
-    private int incr = 0;
 
     /**
      * Creates a new {@link UI} instance that reads moves from the command line
@@ -65,11 +63,6 @@ public class TextUI {
     //     }
     // }
 
-    private int readInt() {
-        String response = sc.nextLine().trim();
-        return Integer.valueOf(response);
-    }
-
     // private String readString() {
     //     if (incr > 1) {
     //         String response = sc.nextLine().trim();
@@ -86,20 +79,23 @@ public class TextUI {
         return response;
     }
 
-    private void makeMove() {
+    /**
+     * Drop a checker
+     */
+    private void dropChecker() {
         while (true) {
             int[] position;
             if (game.getTurn() instanceof Human) {
                 Human humanPlayer = (Human)game.getTurn();
-                position = humanPlayer.makeMove();
+                position = humanPlayer.dropChecker();
             } else {
                 Computer computerPlayer = (Computer) game.getTurn();
-                position = computerPlayer.makeMove();
+                position = computerPlayer.dropChecker();
             }
             int row = position[0];
             int col = position[1];
             try {
-                game.dropPiece(row, col);
+                game.dropChecker(row, col);
                 break;
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
@@ -113,7 +109,7 @@ public class TextUI {
     public void playGame() {
         System.out.println(game.toString());
         while (true) {
-            game.getTurnPlayer().dropPiece();
+            game.getTurnPlayer().dropChecker();
             System.out.println(game.toString());
             if (game.hasWinner()) {
                 System.out.println("Congrats! Player " + game.getWinnerId() + " has won");

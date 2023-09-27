@@ -3,7 +3,7 @@ package com.example;
 public class Spot {
     private int xCoord;
     private int yCoord;
-    private Piece pieceType;
+    private Checker checkerType;
 
     /**
      * Creates new instance of a Spot. When created, a spot does not have a piece in it.
@@ -14,64 +14,46 @@ public class Spot {
     public Spot(int x, int y) {
         xCoord = x;
         yCoord = y;
-        pieceType = Piece.CLEAR;
+        checkerType = Checker.CLEAR;
     }
 
     /**
-     * Updates this spot when a piece is dropped into it.
+     * Updates this spot when a checker is dropped into it.
      *
-     * @param piece The type of piece dropped in
+     * @param checker The type of checker dropped in
      * @return true is the update succeeded, false otherwise
      */
-    public boolean updateSpot(Piece piece) {
-        if (piece == Piece.CLEAR) {
+    public boolean updateSpot(Checker checker) {
+        if (checker == Checker.CLEAR) {
             return false;
         }
-        pieceType = piece;
+        checkerType = checker;
         return true;
     }
 
     /**
      * Checks if this spot is empty.
      *
-     * @return true is the spot does not have a piece in it
+     * @return true is the spot does not have a checker in it
      */
     public boolean isEmpty() {
-        return pieceType == Piece.CLEAR;
+        return checkerType == Checker.CLEAR;
     }
 
     /**
-     * Gets the x-coordinate of this spot
+     * Gets the type of checker in this spot (e.g. yellow, red, clear)
      *
-     * @return x-coordinate
+     * @return the type of checker
      */
-    public int getXCoordinate() {
-        return xCoord;
-    }
-
-    /**
-     * Gets the y-coordinate of this spot
-     *
-     * @return y-coordinate
-     */
-    public int getYCoordinate() {
-        return yCoord;
-    }
-
-    /**
-     * Gets the type of piece in this spot (e.g. yellow, red, clear)
-     *
-     * @return the type of piece
-     */
-    public Piece getPieceType() {
-        return pieceType;
+    public Checker getCheckerType() {
+        return checkerType;
     }
 
     @Override
     public String toString() {
         String result = "";
-        if (pieceType != Piece.CLEAR) {
-            result += (pieceType == Piece.RED) ? "r" : "y";
+        if (checkerType != Checker.CLEAR) {
+            result += (checkerType == Checker.RED) ? "r" : "y";
         } else {
             result += ".";
         }

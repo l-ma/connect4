@@ -3,7 +3,7 @@ package com.example;
 public abstract class Player {
     private static int numOfPlayer = 0;
     private int playerId;
-    private Piece color;
+    private Checker color;
 
     /**
      * Creates a new {@Player} with a specified player id
@@ -12,7 +12,7 @@ public abstract class Player {
      */
     public Player(int playerId) {
         this.playerId = playerId;
-        this.color = (playerId == 1) ? Piece.YELLOW : Piece.RED;
+        this.color = (playerId == 1) ? Checker.YELLOW : Checker.RED;
     }
 
     /**
@@ -21,19 +21,23 @@ public abstract class Player {
     public Player() {
         this.playerId = ++numOfPlayer;
         if (playerId % 2 == 0) {
-            color = Piece.RED;
+            color = Checker.RED;
         } else {
-            color = Piece.YELLOW;
+            color = Checker.YELLOW;
         }
     }
 
     /**
-     * Drops a piece into the board specified by the player
+     * Drops a checker into the board specified by the player
      *
      * @return an array containing the coordinates for the position to drop a piece
      */
-    abstract int[] dropPiece();
+    abstract int[] dropChecker();
 
+    /**
+     * Gets the playerId
+     * @return the id of the player
+     */
     public int getPlayerId() {
         return playerId;
     }
@@ -43,7 +47,7 @@ public abstract class Player {
      *
      * @return the color for the player
      */
-    public Piece getPieceColor() {
+    public Checker getCheckerColor() {
         return color;
     }
 
