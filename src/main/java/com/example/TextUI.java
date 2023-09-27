@@ -5,22 +5,11 @@ import java.util.Scanner;
 public class TextUI {
     private Game game;
     private Scanner sc = new Scanner(System.in);
-    private String[] inputs;
 
     /**
      * Creates a new {@link UI} instance that reads moves from the command line
      */
     public TextUI() {
-        beginGame();
-    }
-
-    /**
-     * Creates a new {@link UI} instance that reads moves from a passed int array containing moves
-     * 
-     * @param inputs the array containing the moves to be executed during the game
-     */
-    public TextUI(String[] inputs) {
-        this.inputs = inputs;
         beginGame();
     }
 
@@ -52,52 +41,9 @@ public class TextUI {
         game = new Game(player1, player2);
     }
 
-    // private int readInt() {
-    //     if (incr <= 1 || incr == inputs.length) {
-    //         String response = sc.nextLine().trim();
-    //         return Integer.valueOf(response);
-    //     } else {
-    //         String result = inputs[incr++].trim();
-    //         System.out.println(result);
-    //         return Integer.valueOf(result);
-    //     }
-    // }
-
-    // private String readString() {
-    //     if (incr > 1) {
-    //         String response = sc.nextLine().trim();
-    //         return response;
-    //     } else {
-    //         String result = inputs[incr++];
-    //         System.out.println(result);
-    //         return result;
-    //     }
-    // }
-
     private String readString() {
         String response = sc.nextLine().trim();
         return response;
-    }
-
-    private void dropChecker() {
-        while (true) {
-            int[] position;
-            if (game.getTurnPlayer() instanceof Human) {
-                Human humanPlayer = (Human)game.getTurnPlayer();
-                position = humanPlayer.dropChecker();
-            } else {
-                Computer computerPlayer = (Computer) game.getTurnPlayer();
-                position = computerPlayer.dropChecker();
-            }
-            int row = position[0];
-            int col = position[1];
-            try {
-                game.dropChecker(row, col);
-                break;
-            } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
     /**
@@ -129,8 +75,6 @@ public class TextUI {
     }
 
     public static void main(String[] args) {
-        String inputs[] = {"human", "human", "5", "0", "4", "0", "5", "1", "3", "0", "5", "2", "3", "0", "2", "0", "5", "3"};
         new TextUI().playGame();
-        // new TextUI(inputs).playGame();
     }
 }
