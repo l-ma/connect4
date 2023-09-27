@@ -128,6 +128,10 @@ public class Game {
         return winner.getPlayerId();
     }
 
+    public Player getTurn() {
+        return turn;
+    }
+
     @Override
     public String toString() {
         return board.toString();

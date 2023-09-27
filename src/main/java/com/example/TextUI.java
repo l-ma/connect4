@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TextUI {
@@ -87,9 +88,16 @@ public class TextUI {
 
     private void makeMove() {
         while (true) {
-            System.out.println("Player " + game.getTurnId() + ": where do you want to drop your piece?");
-            int row = readInt();
-            int col = readInt();
+            int[] position;
+            if (game.getTurn() instanceof Human) {
+                Human humanPlayer = (Human)game.getTurn();
+                position = humanPlayer.makeMove();
+            } else {
+                Computer computerPlayer = (Computer) game.getTurn();
+                position = computerPlayer.makeMove();
+            }
+            int row = position[0];
+            int col = position[1];
             try {
                 game.dropPiece(row, col);
                 break;

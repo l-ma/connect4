@@ -5,8 +5,8 @@ import java.util.Random;
 public class Computer extends Player {
     public int[] dropPiece() {
         Random random = new Random();
-        int row = random.nextInt(20);
-        int column = random.nextInt(20);
+        int row = random.nextInt(6);
+        int column = random.nextInt(7);
         return new int[]{row, column};
     }
 }

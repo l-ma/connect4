@@ -46,4 +46,5 @@ public abstract class Player {
     public Piece getPieceColor() {
         return color;
     }
+
 }

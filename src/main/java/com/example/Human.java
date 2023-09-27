@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Human extends Player {
@@ -9,15 +10,10 @@ public class Human extends Player {
         super(playerId);
     }
 
-    private int readInt() {
-        String response = sc.nextLine().trim();
-        return Integer.valueOf(response);
-    }
-
     public int[] dropPiece() {
         System.out.println("Player " + super.getPlayerId() + ": where do you want to drop your piece?");
-        int row = readInt();
-        int col = readInt();
+        int row = input.nextInt();
+        int col = input.nextInt();
         return new int[]{row, col};
     }
 }
