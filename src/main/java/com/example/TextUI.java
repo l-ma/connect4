@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TextUI {
@@ -77,9 +78,18 @@ public class TextUI {
 
     private void makeMove() {
         while (true) {
-            System.out.println("Player " + game.getTurnId() + ": where do you want to drop your piece?");
-            int row = readInt();
-            int col = readInt();
+            int row;
+            int col;
+            if (game.getTurn() instanceof Human) {
+                System.out.println("Player " + game.getTurnId() + ": where do you want to drop your piece?");
+                row = readInt();
+                col = readInt();
+            } else {
+                Random random = new Random();
+                row = random.nextInt(6);
+                col = random.nextInt(7);
+            }
+
             try {
                 game.makeMove(row, col);
                 break;
@@ -113,6 +123,6 @@ public class TextUI {
 
     public static void main(String[] args) {
         String inputs[] = {"human", "human", "5", "0", "4", "0", "5", "1", "3", "0", "5", "2", "3", "0", "2", "0", "5", "3"};
-        new TextUI(inputs).playGame();
+        new TextUI().playGame();
     }
 }
