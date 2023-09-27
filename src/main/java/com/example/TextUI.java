@@ -53,26 +53,36 @@ public class TextUI {
         game = new Game(player1, player2);
     }
 
+    // private int readInt() {
+    //     if (incr <= 1 || incr == inputs.length) {
+    //         String response = sc.nextLine().trim();
+    //         return Integer.valueOf(response);
+    //     } else {
+    //         String result = inputs[incr++].trim();
+    //         System.out.println(result);
+    //         return Integer.valueOf(result);
+    //     }
+    // }
+
     private int readInt() {
-        if (incr <= 1 || incr == inputs.length) {
-            String response = sc.nextLine().trim();
-            return Integer.valueOf(response);
-        } else {
-            String result = inputs[incr++].trim();
-            System.out.println(result);
-            return Integer.valueOf(result);
-        }
+        String response = sc.nextLine().trim();
+        return Integer.valueOf(response);
     }
 
+    // private String readString() {
+    //     if (incr > 1) {
+    //         String response = sc.nextLine().trim();
+    //         return response;
+    //     } else {
+    //         String result = inputs[incr++];
+    //         System.out.println(result);
+    //         return result;
+    //     }
+    // }
+
     private String readString() {
-        if (incr > 1) {
-            String response = sc.nextLine().trim();
-            return response;
-        } else {
-            String result = inputs[incr++];
-            System.out.println(result);
-            return result;
-        }
+        String response = sc.nextLine().trim();
+        return response;
     }
 
     private void makeMove() {
@@ -81,7 +91,7 @@ public class TextUI {
             int row = readInt();
             int col = readInt();
             try {
-                game.makeMove(row, col);
+                game.dropPiece(row, col);
                 break;
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
@@ -95,7 +105,7 @@ public class TextUI {
     public void playGame() {
         System.out.println(game.toString());
         while (true) {
-            makeMove();
+            game.getTurnPlayer().dropPiece();
             System.out.println(game.toString());
             if (game.hasWinner()) {
                 System.out.println("Congrats! Player " + game.getWinnerId() + " has won");
@@ -113,6 +123,7 @@ public class TextUI {
 
     public static void main(String[] args) {
         String inputs[] = {"human", "human", "5", "0", "4", "0", "5", "1", "3", "0", "5", "2", "3", "0", "2", "0", "5", "3"};
-        new TextUI(inputs).playGame();
+        new TextUI().playGame();
+        // new TextUI(inputs).playGame();
     }
 }
