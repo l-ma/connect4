@@ -3,17 +3,21 @@ package com.example;
 import java.util.Scanner;
 
 public class Human extends Player {
-    Scanner input = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
     public Human(int playerId) {
         super(playerId);
     }
 
-    public int[] dropChecker() {
-        System.out.println("Please enter the row number: ");
-        int row = input.nextInt();
-        System.out.println("Please enter the column number: ");
-        int column = input.nextInt();
-        return new int[]{row, column};
+    private int readInt() {
+        String response = sc.nextLine().trim();
+        return Integer.valueOf(response);
+    }
+
+    public int[] dropPiece() {
+        System.out.println("Player " + super.getPlayerId() + ": where do you want to drop your piece?");
+        int row = readInt();
+        int col = readInt();
+        return new int[]{row, col};
     }
 }
