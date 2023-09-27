@@ -2,11 +2,12 @@ package com.example;
 
 public enum PlayerType {
     /**
-     * A human
+     * A human player
      */
     HUMAN,
+    
     /**
-     * A computer
+     * A computer player
      */
     COMPUTER
 }

@@ -6,6 +6,7 @@ public class Computer extends Player {
     public Computer(int playerId) {
         super(playerId);
     }
+    
     /**
      * Gets coordinates to drop a checker in some position on the board
      *

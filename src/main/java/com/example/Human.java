@@ -14,6 +14,7 @@ public class Human extends Player {
     public Human(int playerId) {
         super(playerId);
     }
+    
     /**
      * Gets coordinates to drop a checker in some position on the board
      *

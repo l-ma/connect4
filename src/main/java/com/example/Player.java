@@ -1,7 +1,6 @@
 package com.example;
 
 public abstract class Player {
-    private static int numOfPlayer = 0;
     private int playerId;
     private Checker color;
 
@@ -19,7 +18,6 @@ public abstract class Player {
      * Creates a new {@Player}
      */
     public Player() {
-        this.playerId = ++numOfPlayer;
         if (playerId % 2 == 0) {
             color = Checker.RED;
         } else {

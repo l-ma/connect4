@@ -2,11 +2,12 @@ package com.example;
 
 public class Board {
     /**
-     * Number of row of the board
+     * Number of rows in the board
      */
     public static final int NUM_ROW = 6;
+    
     /**
-     * Number of column of the board
+     * Number of columns in the board
      */
     public static final int NUM_COL = 7;
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
