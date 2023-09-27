@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Human extends Player {
@@ -9,11 +10,10 @@ public class Human extends Player {
         super(playerId);
     }
 
-    public int[] dropChecker() {
-        System.out.println("Please enter the row number: ");
+    public int[] makeMove() {
+        System.out.println("Where do you want to drop your piece?");
         int row = input.nextInt();
-        System.out.println("Please enter the column number: ");
-        int column = input.nextInt();
-        return new int[]{row, column};
+        int col = input.nextInt();
+        return new int[]{row, col};
     }
 }

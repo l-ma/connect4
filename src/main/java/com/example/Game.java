@@ -79,6 +79,10 @@ public class Game {
         throw new NullPointerException("There is no winner yet");
     }
 
+    public Player getTurn() {
+        return turn;
+    }
+
     @Override
     public String toString() {
         return board.toString();

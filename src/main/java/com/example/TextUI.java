@@ -78,18 +78,16 @@ public class TextUI {
 
     private void makeMove() {
         while (true) {
-            int row;
-            int col;
+            int[] position;
             if (game.getTurn() instanceof Human) {
-                System.out.println("Player " + game.getTurnId() + ": where do you want to drop your piece?");
-                row = readInt();
-                col = readInt();
+                Human humanPlayer = (Human)game.getTurn();
+                position = humanPlayer.makeMove();
             } else {
-                Random random = new Random();
-                row = random.nextInt(6);
-                col = random.nextInt(7);
+                Computer computerPlayer = (Computer) game.getTurn();
+                position = computerPlayer.makeMove();
             }
-
+            int row = position[0];
+            int col = position[1];
             try {
                 game.makeMove(row, col);
                 break;
