@@ -1,4 +1,4 @@
-package com.example;
+package com.connect4;
 
 /**
  * Represents a spot on a board of Connect 4.

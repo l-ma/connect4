@@ -1,4 +1,4 @@
-package com.example;
+package com.connect4;
 
 /**
  * Represents a player in Connect 4.

@@ -1,4 +1,4 @@
-package com.example;
+package com.connect4;
 
 import java.util.Scanner;
 
@@ -75,5 +75,9 @@ public class TextUI {
                 return;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new TextUI().playGame();
     }
 }

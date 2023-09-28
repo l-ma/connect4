@@ -1,4 +1,4 @@
-package com.example;
+package com.connect4;
 
 /**
  * Represents a board in a game of Connect 4. Each spot in the board starts by having no checker, and as a game progresses, more spots get filled as players drop their respective checkers.

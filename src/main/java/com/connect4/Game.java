@@ -1,4 +1,4 @@
-package com.example;
+package com.connect4;
 
 /**
  * Represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries to make a straight line (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid. A randomly-chosen player plays first, with players alternating thereafter. If the same players play multiple games in a row, they generally take turns playing first.

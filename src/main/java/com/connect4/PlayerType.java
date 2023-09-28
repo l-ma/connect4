@@ -1,4 +1,4 @@
-package com.example;
+package com.connect4;
 
 /**
  * The types of players in Connect 4
