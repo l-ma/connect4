@@ -76,8 +76,4 @@ public class TextUI {
             }
         }
     }
-
-    public static void main(String[] args) {
-        new TextUI().playGame();
-    }
 }
