@@ -31,9 +31,9 @@ public abstract class Player {
     /**
      * Drops a checker into the board specified by the player
      *
-     * @return an array containing the coordinates for the position to drop a piece
+     * @return an integer of column number in which the checker is dropped
      */
-    abstract int[] dropChecker();
+    abstract int dropChecker();
 
     /**
      * Gets the playerId

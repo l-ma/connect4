@@ -29,14 +29,25 @@ public class Game {
     }
 
     /**
-     * Drops a checker in the specified position
+     * Drops a checker in the specified column
      *
-     * @param x the x-coordinate of the spot where the checker will be dropped
-     * @param y the y-coordinate of the spot where the checker will be dropped
+     * @param column the column number in which the checker will be dropped
      */
-    public void dropChecker(int x, int y) {
-        board.dropChecker(x, y, turn.getCheckerColor());
-        if (hasWinner(x, y)) {
+    public void dropChecker(int column) {
+        int row;
+        // Check if the column is within the boundary and find the first empty row of this column
+        if (column < 0 || column >= board.getNumOfCols()) {
+            throw new RuntimeException("Not a valid column. It is not within the boundary of the board.");
+        } else {
+            row = board.firstEmptyRow(column);
+        }
+        // System.out.println("First empty row: " + row);
+        // Check if the column is full
+        if (row == -1) {
+            throw new RuntimeException("This column already full.");
+        }
+        board.dropChecker(row, column, turn.getCheckerColor());
+        if (hasWinner(row, column)) {
             winner = turn;
         }
         changeTurn();

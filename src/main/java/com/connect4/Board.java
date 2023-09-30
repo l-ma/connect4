@@ -29,45 +29,34 @@ class Board {
     /**
      * Drops a checker into the board
      *
-     * @param x the x-coordinate of the spot where the checker will be dropped
-     * @param y the y-coordinate of the spot where the checker will be dropped
+     * @param row row number in which the checker will be dropped
+     * @param column column number in which the checker will be dropped
      * @param checkerDropped the type of checker dropped
      * @return true if the move succeeds, false otherwise
      */
-    public boolean dropChecker(int x, int y, Checker checkerDropped) {
-        if (!isValidMove(x, y)) {
-            throw new RuntimeException("Not a valid spot");
-        }
+    public boolean dropChecker(int row, int column, Checker checkerDropped) {
+
+        // Check if the checker is either Yellow or Red
         if (checkerDropped == Checker.CLEAR) {
             throw new RuntimeException("dropping clear");
         }
-        board[x][y].updateChecker(checkerDropped);
+        board[row][column].updateChecker(checkerDropped);
+
         return true;
     }
-
     /**
-     * Checks if it is valid to drop a checker at a certain position on the board
+     * To get the row number that the checker should be dropped
      *
-     * @param x the x-coordinate of the potential move
-     * @param y the y-coordinate of the potential move
-     * @return true if the spot (x, y) is a valid spot according to the rules of Connect 4, false otherwise
+     * @param column the number of column in which the checker will be dropped
+     * @return int row number that a checker should be dropped. Return -1 if this column is full.
      */
-    public boolean isValidMove(int x, int y) {
-        if (x < 0 || y < 0 || x >= NUM_ROW || y >= NUM_COL) {
-            System.out.println("Out of bounds!");
-            return false;
-        }
-        if (!board[x][y].isEmpty()) {
-            System.out.println("This spot already has checker.");
-            return false;
-        }
-        for (int i = x + 1; i < NUM_ROW; i++) {
-            if (board[i][y].isEmpty()) {
-                System.out.println("Not sure what it is.");
-                return false;
+    public int firstEmptyRow(int column) {
+        for (int row = board.length - 1; row >= 0; row--) {
+            if (board[row][column].isEmpty()) {
+                return row;
             }
         }
-        return true;
+        return -1;
     }
 
     private Spot getSpot(int x, int y) {
@@ -155,7 +144,6 @@ class Board {
             for (int j = 0; j < NUM_COL; j++) {
                 Spot spot = board[i][j];
                 spot.updateChecker(Checker.CLEAR);
-                // Does it return false?
             }
         }
     }

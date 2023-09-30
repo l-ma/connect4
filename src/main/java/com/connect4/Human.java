@@ -18,14 +18,13 @@ public class Human extends Player {
     }
 
     /**
-     * Gets coordinates to drop a checker in some position on the board
+     * Gets column to drop a checker in some position on the board
      *
-     * @return int[] that contains [row, col] which are the coordinates for the drop spot
+     * @return integer of column number in which the checker is dropped
      */
-    public int[] dropChecker() {
-        System.out.println("Player " + super.getPlayerId() + ": where do you want to drop your piece?");
-        int row = input.nextInt();
+    public int dropChecker() {
+        System.out.println("Player " + super.getPlayerId() + ": which column do you want to drop your checker?");
         int col = input.nextInt();
-        return new int[]{row, col};
+        return col;
     }
 }

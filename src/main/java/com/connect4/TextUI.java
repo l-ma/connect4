@@ -55,9 +55,9 @@ public class TextUI {
     public void playGame() {
         System.out.println(game.toString());
         while (true) {
-            int[] res = game.getCurrentPlayer().dropChecker();
+            int res = game.getCurrentPlayer().dropChecker();
             try {
-                game.dropChecker(res[0], res[1]);
+                game.dropChecker(res);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 continue;
