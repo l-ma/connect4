@@ -38,10 +38,11 @@ class Board {
         if (!isValidMove(x, y)) {
             throw new RuntimeException("Not a valid spot");
         }
-        if (board[x][y].updateSpot(checkerDropped)) {
-            return true;
+        if (checkerDropped == Checker.CLEAR) {
+            throw new RuntimeException("dropping clear");
         }
-        throw new RuntimeException("dropping clear");
+        board[x][y].updateChecker(checkerDropped);
+        return true;
     }
 
     /**
@@ -53,13 +54,16 @@ class Board {
      */
     public boolean isValidMove(int x, int y) {
         if (x < 0 || y < 0 || x >= NUM_ROW || y >= NUM_COL) {
+            System.out.println("Out of bounds!");
             return false;
         }
         if (!board[x][y].isEmpty()) {
+            System.out.println("This spot already has checker.");
             return false;
         }
         for (int i = x + 1; i < NUM_ROW; i++) {
             if (board[i][y].isEmpty()) {
+                System.out.println("Not sure what it is.");
                 return false;
             }
         }
@@ -150,7 +154,8 @@ class Board {
         for (int i = 0; i < NUM_ROW; i++) {
             for (int j = 0; j < NUM_COL; j++) {
                 Spot spot = board[i][j];
-                spot.updateSpot(Checker.CLEAR);
+                spot.updateChecker(Checker.CLEAR);
+                // Does it return false?
             }
         }
     }

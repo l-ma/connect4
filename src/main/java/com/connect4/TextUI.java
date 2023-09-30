@@ -55,7 +55,7 @@ public class TextUI {
     public void playGame() {
         System.out.println(game.toString());
         while (true) {
-            int[] res = game.getTurnPlayer().dropChecker();
+            int[] res = game.getCurrentPlayer().dropChecker();
             try {
                 game.dropChecker(res[0], res[1]);
             } catch (Exception e) {
@@ -75,5 +75,10 @@ public class TextUI {
                 return;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        TextUI game = new TextUI();
+        game.playGame();
     }
 }

@@ -83,7 +83,7 @@ public class Game {
      * @return the player whose move it is
      * @throws RuntimeException if there is no player whose turn it is
      */
-    public Player getTurnPlayer() {
+    public Player getCurrentPlayer() {
         if (turn == null) {
             throw new RuntimeException("There is no turn yet");
         }
@@ -97,6 +97,7 @@ public class Game {
      * @throws RuntimeException if there is no winner
      */
     public Player getWinner() {
+        // if (winner != null) {
         if (hasWinner()) {
             return winner;
         }
@@ -110,6 +111,7 @@ public class Game {
      * @throws RuntimeException if there is no winner
      */
     public int getWinnerId() {
+        // if (winner == null) {
         if (getWinner() == null) {
             throw new RuntimeException("There is no winner yet");
         }
