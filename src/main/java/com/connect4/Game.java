@@ -96,9 +96,7 @@ public class Game {
      * @return the winning player
      * @throws RuntimeException if there is no winner
      */
-    public Player getWinner() {
-        // if (winner != null) {
-        if (hasWinner()) {
+    public Player getWinner() {if (winner != null) {
             return winner;
         }
         throw new RuntimeException("There is no winner yet");
@@ -111,8 +109,7 @@ public class Game {
      * @throws RuntimeException if there is no winner
      */
     public int getWinnerId() {
-        // if (winner == null) {
-        if (getWinner() == null) {
+        if (winner == null) {
             throw new RuntimeException("There is no winner yet");
         }
         return winner.getPlayerId();
