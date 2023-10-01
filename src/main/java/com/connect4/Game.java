@@ -17,9 +17,11 @@ public class Game {
      * @param p2 the type of the second player (human or computer)
      */
     public Game(PlayerType p1, PlayerType p2) {
-        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1) : new Computer(1);
-        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2) : new Computer(2);
-        this.turn = (System.currentTimeMillis() % 2 == 1) ? this.player1 : this.player2;
+        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
+        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
+        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1, color1) : new Computer(1, color1);
+        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2, color2) : new Computer(2, color2);
+        this.turn = (color1 == Checker.YELLOW)? this.player1: this.player2;
         this.winner = null;
         this.board = new Board();
     }
@@ -90,6 +92,11 @@ public class Game {
     public void newRound() {
         winner = null;
         board.resetBoard();
+        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
+        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
+        player1.changeCheckerColor(color1);
+        player2.changeCheckerColor(color2);
+        turn = (color1 == Checker.YELLOW)? player1: player2;
     }
 
     /**

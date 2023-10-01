@@ -7,12 +7,13 @@ import java.util.Random;
  */
 public class Computer extends Player {
     /**
-     * Creates a new {@code Computer} with a specified player id
+     * Creates a new {@code Player} with a specified player id and CheckerType
      *
      * @param playerId the player id for the player being created
+     * @param checker the randomly-assigned checker type for the player
      */
-    public Computer(int playerId) {
-        super(playerId);
+    public Computer(int playerId, Checker checker) {
+        super(playerId, checker);
     }
 
     /**

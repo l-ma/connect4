@@ -9,12 +9,13 @@ public class Human extends Player {
     Scanner input = new Scanner(System.in);
 
     /**
-     * Creates a new instance of a {@code Human} with a specified player id
+     * Creates a new {@code Player} with a specified player id and CheckerType
      *
-     * @param playerId id of a human player
+     * @param playerId the player id for the player being created
+     * @param checker the randomly-assigned checker type for the player
      */
-    public Human(int playerId) {
-        super(playerId);
+    public Human(int playerId, Checker checker) {
+        super(playerId, checker);
     }
 
     /**

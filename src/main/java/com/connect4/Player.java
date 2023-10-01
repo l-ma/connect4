@@ -8,13 +8,18 @@ public abstract class Player {
     private Checker color;
 
     /**
-     * Creates a new {@code Player} with a specified player id
+     * Creates a new {@code Player} with a specified player id and CheckerType
      *
      * @param playerId the player id for the player being created
+     * @param checker the randomly-assigned checker type for the player
      */
-    public Player(int playerId) {
+    public Player(int playerId, Checker checker) {
         this.playerId = playerId;
-        this.color = (playerId == 1) ? Checker.YELLOW : Checker.RED;
+        this.color = checker;
+    }
+
+    public void changeCheckerColor(Checker checker) {
+        this.color = checker;
     }
 
     /**
