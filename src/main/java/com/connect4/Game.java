@@ -80,6 +80,10 @@ public class Game {
         return board.hasWinner(x, y);
     }
 
+    public boolean isBoardFull() {
+        return board.isBoardFull();
+    }
+
     /**
      * Ends the current game, but is ready for another round to be played
      */
@@ -126,8 +130,19 @@ public class Game {
         return winner.getPlayerId();
     }
 
+    public String boardStatus() {
+        return board.toString();
+    }
+
+
     @Override
     public String toString() {
-        return board.toString();
+        String res = board.toString() + "\n";
+        if (winner != null) {
+            res += "Winner is " + winner + ".";
+        } else {
+            res += "Now is " + turn + " turn.";
+        }
+        return res;
     }
 }

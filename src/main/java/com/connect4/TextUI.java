@@ -53,7 +53,7 @@ public class TextUI {
      * Runs a game until one player wins
      */
     public void playGame() {
-        System.out.println(game.toString());
+        System.out.println(game.boardStatus());
         while (true) {
             int res = game.getCurrentPlayer().dropChecker();
             try {
@@ -63,8 +63,13 @@ public class TextUI {
                 continue;
             }
             System.out.println(game.toString());
-            if (game.hasWinner()) {
-                System.out.println("Congrats! Player " + game.getWinnerId() + " has won");
+            if (game.hasWinner() || game.isBoardFull()) {
+                if (game.hasWinner()) {
+                    System.out.println("Congrats! Player " + game.getWinnerId() + " has won");
+                }
+                if (game.isBoardFull()) {
+                    System.out.println("The board is full. No one won.");
+                }
                 System.out.println("Game finishing...");
                 System.out.println("Play again? [Y/N]: ");
                 String restart = readString();

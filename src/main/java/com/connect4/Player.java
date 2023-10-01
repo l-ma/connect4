@@ -51,5 +51,9 @@ public abstract class Player {
     public Checker getCheckerColor() {
         return color;
     }
+    @Override
+    public String toString() {
+        return "Player " + playerId;
+    }
 
 }

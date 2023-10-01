@@ -136,6 +136,14 @@ class Board {
         return false;
     }
 
+    public boolean isBoardFull() {
+        for (int i = 0; i < NUM_COL; i++) {
+            if (board[0][i].getCheckerType() == Checker.CLEAR) {
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * Resets the board by removing all checkers currently dropped
      */
@@ -165,6 +173,8 @@ class Board {
     public int getNumOfCols() {
         return NUM_COL;
     }
+
+
 
     @Override
     public String toString() {
