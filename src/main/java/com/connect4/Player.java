@@ -18,17 +18,6 @@ public abstract class Player {
     }
 
     /**
-     * Creates a new {@code Player}
-     */
-    public Player() {
-        if (playerId % 2 == 0) {
-            color = Checker.RED;
-        } else {
-            color = Checker.YELLOW;
-        }
-    }
-
-    /**
      * Drops a checker into the board specified by the player
      *
      * @return an integer of column number in which the checker is dropped

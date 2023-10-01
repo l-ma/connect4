@@ -29,9 +29,12 @@ public class Game {
     }
 
     /**
-     * Drops a checker in the specified column
+     * Drops a checker in the specified column.
+     *
+     * Column number starts form 0. For example, the first column of the board should be indexed as 0.
      *
      * @param column the column number in which the checker will be dropped
+     * @throws RuntimeException if the column number is not within the board boundary or the column is already full,
      */
     public void dropChecker(int column) {
         int row;
@@ -41,7 +44,6 @@ public class Game {
         } else {
             row = board.firstEmptyRow(column);
         }
-        // System.out.println("First empty row: " + row);
         // Check if the column is full
         if (row == -1) {
             throw new RuntimeException("This column already full.");
@@ -54,17 +56,15 @@ public class Game {
     }
 
     /**
-     * Checks if a player has won the game
+     * Checks if a player has won the game.
+     *
+     * A user will win the game when making a straight line (vertical, horizontal, or diagonal) of four of their colored checker.
      *
      * @return true if either player has successfully won the game
      */
     public boolean hasWinner() {
-        for (int x = 0; x < board.getNumOfRows(); x++) {
-            for (int y = 0; y < board.getNumOfCols(); y++) {
-                if (hasWinner(x, y)) {
-                    return true;
-                }
-            }
+        if (winner != null) {
+            return true;
         }
         return false;
     }
@@ -76,7 +76,7 @@ public class Game {
      * @param y the y-coordinate of the spot to be checked
      * @return true if either player has successfully won the game
      */
-    public boolean hasWinner(int x, int y) {
+    private boolean hasWinner(int x, int y) {
         return board.hasWinner(x, y);
     }
 
@@ -85,7 +85,7 @@ public class Game {
     }
 
     /**
-     * Ends the current game, but is ready for another round to be played
+     * Ends the current round and restart a round for the same players
      */
     public void newRound() {
         winner = null;
@@ -117,18 +117,6 @@ public class Game {
         throw new RuntimeException("There is no winner yet");
     }
 
-    /**
-     * Gets the id for the player who has won the game
-     *
-     * @return the id of the winning player
-     * @throws RuntimeException if there is no winner
-     */
-    public int getWinnerId() {
-        if (winner == null) {
-            throw new RuntimeException("There is no winner yet");
-        }
-        return winner.getPlayerId();
-    }
 
     public String boardStatus() {
         return board.toString();
@@ -137,7 +125,9 @@ public class Game {
 
     @Override
     public String toString() {
-        String res = board.toString() + "\n";
+        String res = "Board status: \n" + board.toString() + "\n";
+        res += "Player 1 checker color: " + player1.getCheckerColor() + "\n";
+        res += "Player 2 checker color: " + player2.getCheckerColor() + "\n";
         if (winner != null) {
             res += "Winner is " + winner + ".";
         } else {

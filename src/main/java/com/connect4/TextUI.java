@@ -62,14 +62,15 @@ public class TextUI {
                 System.out.println(e.getMessage());
                 continue;
             }
-            System.out.println(game.toString());
+            System.out.println(game.boardStatus());
             if (game.hasWinner() || game.isBoardFull()) {
                 if (game.hasWinner()) {
-                    System.out.println("Congrats! Player " + game.getWinnerId() + " has won");
+                    System.out.println("Congrats! " + game.getWinner() + " has won!");
                 }
                 if (game.isBoardFull()) {
                     System.out.println("The board is full. No one won.");
                 }
+                System.out.println(game.toString());
                 System.out.println("Game finishing...");
                 System.out.println("Play again? [Y/N]: ");
                 String restart = readString();
