@@ -15,21 +15,17 @@ public class Game {
     /**
      * Creates a new instance of a Connect 4 Game.
      *
-     * @param p1 the type of the first player (human or computer)
-     * @param p2 the type of the second player (human or computer)
+     * @param player1Type the type of the first player (human or computer)
+     * @param player2Type the type of the second player (human or computer)
      */
-    public Game(PlayerType p1, PlayerType p2) {
+    public Game(PlayerType player1Type, PlayerType player2Type) {
         Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
         Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
-        this.player1 = new Player(1, color1, p1);
-        this.player2 = new Player(2, color2, p2);
+        this.player1 = new Player(1, color1, player1Type);
+        this.player2 = new Player(2, color2, player2Type);
         this.turn = (color1 == Checker.YELLOW)? this.player1: this.player2;
         this.winner = null;
         this.board = new Board();
-    }
-
-    private void changeTurn() {
-        turn = (turn == player1) ? player2 : player1;
     }
 
     /**
@@ -59,6 +55,37 @@ public class Game {
     }
 
     /**
+     * Helper method to change the current turn status after one player drop the checker
+     */
+    private void changeTurn() {
+        turn = (turn == player1) ? player2 : player1;
+    }
+
+    /**
+     * Helper method to check if there is a winner after dropping a checker at specific spot
+     *
+     * @param row the row number of the spot to be dropped
+     * @param column the column number of the spot to be dropped
+     * @return true if either player has successfully won the game
+     */
+    private boolean hasWinner(int row, int column) {
+        return board.hasWinner(row, column);
+    }
+
+    /**
+     * Gets the player whose turn it currently is
+     *
+     * @return the player whose turn it is
+     * @throws RuntimeException if there is no player whose turn it is
+     */
+    public Player getCurrentPlayer() {
+        if (turn == null) {
+            throw new RuntimeException("There is no turn yet");
+        }
+        return turn;
+    }
+
+    /**
      * Checks if a player has won the game. A user will win the game when making a straight
      * line (vertical, horizontal, or diagonal) with four of their colored checkers.
      *
@@ -72,23 +99,24 @@ public class Game {
     }
 
     /**
-     * Check if there is a winner at a specific coorindate.
-     * 
-     * @param x the x-coordinate of the spot to be checked
-     * @param y the y-coordinate of the spot to be checked
-     * @return true if either player has successfully won the game
-     */
-    private boolean hasWinner(int x, int y) {
-        return board.hasWinner(x, y);
-    }
-
-    /**
      * Check if the board is full of checkers.
      *
      * @return true if the board has no open spaces, false otherwise
      */
     public boolean isBoardFull() {
         return board.isBoardFull();
+    }
+
+    /**
+     * Gets the player who has won the game
+     *
+     * @return the winning player
+     * @throws RuntimeException if there is no winner
+     */
+    public Player getWinner() {if (winner != null) {
+        return winner;
+    }
+        throw new RuntimeException("There is no winner");
     }
 
     /**
@@ -106,32 +134,6 @@ public class Game {
     }
 
     /**
-     * Gets the player whose turn it currently is
-     *
-     * @return the player whose move it is
-     * @throws RuntimeException if there is no player whose turn it is
-     */
-    public Player getCurrentPlayer() {
-        if (turn == null) {
-            throw new RuntimeException("There is no turn yet");
-        }
-        return turn;
-    }
-
-    /**
-     * Gets the player who has won the game
-     *
-     * @return the winning player
-     * @throws RuntimeException if there is no winner
-     */
-    public Player getWinner() {
-        if (winner == null) {
-            throw new RuntimeException("There is no winner yet");
-        }
-        return winner;
-    }
-
-    /**
      * Returns just the board as a string with no extra information about the game.
      *
      * @return string representation of the board
@@ -139,7 +141,6 @@ public class Game {
     public String boardToString() {
         return board.toString();
     }
-
 
     /**
      * Displays the board with extra information about the game.

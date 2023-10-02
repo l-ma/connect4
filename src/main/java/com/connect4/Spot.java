@@ -4,19 +4,19 @@ package com.connect4;
  * Represents a spot on a board of Connect 4.
  */
 class Spot {
-    private int xCoord;
-    private int yCoord;
+    private int row;
+    private int column;
     private Checker checkerType;
 
     /**
-     * Creates new instance of a Spot. When created, a spot does not have a piece in it.
+     * Creates new instance of a Spot. When created, a spot does not have a checker in it (checkerType = Checker.CLEAR)
      *
-     * @param x the x-coordinate of the new spot
-     * @param y the y-coordinate of the new spot
+     * @param row the row number of the new spot on the board
+     * @param column the column number of the new spot on the board
      */
-    public Spot(int x, int y) {
-        xCoord = x;
-        yCoord = y;
+    public Spot(int row, int column) {
+        this.row = row;
+        this.column = column;
         checkerType = Checker.CLEAR;
     }
 
@@ -47,6 +47,10 @@ class Spot {
         return checkerType;
     }
 
+    /**
+     * It shows the checker color of the spot.
+     * @return String that shows the checker color of the spot
+     */
     @Override
     public String toString() {
         String result = "";

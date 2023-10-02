@@ -9,10 +9,11 @@ public class Player {
     private PlayerType playerType;
 
     /**
-     * Creates a new {@code Player} with a specified player id and CheckerType
+     * Creates a new {@code Player} with a specified player id, checker color, and PlayerType
      *
      * @param playerId the player id for the player being created
-     * @param checker the randomly-assigned checker type for the player
+     * @param checker the randomly-assigned checker color for the player
+     * @param playerType the player type of the player (human or computer)
      */
     public Player(int playerId, Checker checker, PlayerType playerType) {
         this.playerId = playerId;
@@ -20,6 +21,10 @@ public class Player {
         this.playerType = playerType;
     }
 
+    /**
+     * Change the player's checker color
+     * @param checker checker color to be changed to
+     */
     public void changeCheckerColor(Checker checker) {
         this.color = checker;
     }
@@ -33,7 +38,7 @@ public class Player {
     }
 
     /**
-     * Gets the color of the pieces for this player
+     * Gets the color of the checker for this player
      *
      * @return the color for the player
      */
@@ -41,10 +46,19 @@ public class Player {
         return color;
     }
 
+    /**
+     * Gets the player type of this player
+     *
+     * @return the playerType for the player
+     */
     public PlayerType getPlayerType() {
         return playerType;
     }
 
+    /**
+     * Shows "Player {playerId}"
+     * @return String shows "Player {playerId}"
+     */
     @Override
     public String toString() {
         return "Player " + playerId;
