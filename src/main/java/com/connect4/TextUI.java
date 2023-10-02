@@ -1,5 +1,6 @@
 package com.connect4;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -8,7 +9,8 @@ import java.util.Scanner;
 public class TextUI {
     private Game game;
     private Scanner sc = new Scanner(System.in);
-
+    private Scanner input = new Scanner(System.in);
+    private Random random = new Random();
     /**
      * Creates a new {@code UI} instance that reads moves from the command line
      */
@@ -32,7 +34,7 @@ public class TextUI {
         while (true) {
             System.out.println("Player 2 is a [human, computer]: ");
             p2 = readString();
-            if (!(p2.equals("human") || p2.equals("computer"))) {
+            if (!(p2.toLowerCase().equals("human") || p2.toLowerCase().equals("computer"))) {
                 System.out.println("Not a valid input, player must be a human or computer. Please try again.");
                 continue;
             } else {
@@ -55,9 +57,17 @@ public class TextUI {
     public void playGame() {
         System.out.println(game.boardStatus());
         while (true) {
-            int res = game.getCurrentPlayer().dropChecker();
+            int col = 0;
+            if (game.getCurrentPlayer().getPlayerType() == PlayerType.HUMAN) {
+                System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + ": which column do you want to drop your checker?");
+                col = input.nextInt();
+            } else if (game.getCurrentPlayer().getPlayerType() == PlayerType.COMPUTER) {
+                col = random.nextInt(7);
+                System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + " drop the checker in column " + col);
+            }
+
             try {
-                game.dropChecker(res);
+                game.dropChecker(col);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 continue;
@@ -74,7 +84,7 @@ public class TextUI {
                 System.out.println("Game finishing...");
                 System.out.println("Play again? [Y/N]: ");
                 String restart = readString();
-                if (restart.equals("Y")) {
+                if (restart.equals("Y") || restart.equals("y")) {
                     game.newRound();
                     continue;
                 }
