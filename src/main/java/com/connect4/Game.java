@@ -14,22 +14,15 @@ public class Game {
 
     /**
      * Creates a new instance of a Connect 4 Game.
-     *
-     * @param p1 the type of the first player (human or computer)
-     * @param p2 the type of the second player (human or computer)
      */
-    public Game(PlayerType p1, PlayerType p2) {
+    public Game() {
         Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
         Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
-        this.player1 = new Player(1, color1, p1);
-        this.player2 = new Player(2, color2, p2);
+        this.player1 = new Player(1, color1);
+        this.player2 = new Player(2, color2);
         this.turn = (color1 == Checker.YELLOW)? this.player1: this.player2;
         this.winner = null;
         this.board = new Board();
-    }
-
-    private void changeTurn() {
-        turn = (turn == player1) ? player2 : player1;
     }
 
     /**
@@ -59,50 +52,21 @@ public class Game {
     }
 
     /**
-     * Checks if a player has won the game. A user will win the game when making a straight
-     * line (vertical, horizontal, or diagonal) with four of their colored checkers.
+     * Helper method to change the current turn status after one player drop the checker
+     */
+    private void changeTurn() {
+        turn = (turn == player1) ? player2 : player1;
+    }
+
+    /**
+     * Helper method to check if there is a winner after dropping a checker at specific spot
      *
+     * @param row the row number of the spot to be dropped
+     * @param column the column number of the spot to be dropped
      * @return true if either player has successfully won the game
      */
-    public boolean hasWinner() {
-        if (winner != null) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Check if there is a winner at a specific coorindate.
-     * 
-     * @param x the x-coordinate of the spot to be checked
-     * @param y the y-coordinate of the spot to be checked
-     * @return true if either player has successfully won the game
-     */
-    private boolean hasWinner(int x, int y) {
-        return board.hasWinner(x, y);
-    }
-
-    /**
-     * Check if the board is full of checkers.
-     *
-     * @return true if the board has no open spaces, false otherwise
-     */
-    public boolean isBoardFull() {
-        return board.isBoardFull();
-    }
-
-    /**
-     * Ends the current round and starts a new round for the same players. The board is cleared
-     * and checker colors may change, but the players are kept the same.
-     */
-    public void newRound() {
-        winner = null;
-        board.resetBoard();
-        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
-        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
-        player1.changeCheckerColor(color1);
-        player2.changeCheckerColor(color2);
-        turn = (color1 == Checker.YELLOW)? player1: player2;
+    private boolean hasWinner(int row, int column) {
+        return board.hasWinner(row, column);
     }
 
     /**
@@ -119,6 +83,28 @@ public class Game {
     }
 
     /**
+     * Checks if a player has won the game. A user will win the game when making a straight
+     * line (vertical, horizontal, or diagonal) with four of their colored checkers.
+     *
+     * @return true if either player has successfully won the game
+     */
+    public boolean hasWinner() {
+        if (winner != null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check if the board is full of checkers.
+     *
+     * @return true if the board has no open spaces, false otherwise
+     */
+    public boolean isBoardFull() {
+        return board.isBoardFull();
+    }
+
+    /**
      * Gets the player who has won the game
      *
      * @return the winning player
@@ -129,6 +115,20 @@ public class Game {
             throw new RuntimeException("There is no winner yet");
         }
         return winner;
+    }
+
+    /**
+     * Ends the current round and starts a new round for the same players. The board is cleared
+     * and checker colors may change, but the players are kept the same.
+     */
+    public void newRound() {
+        winner = null;
+        board.resetBoard();
+        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
+        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
+        player1.changeCheckerColor(color1);
+        player2.changeCheckerColor(color2);
+        turn = (color1 == Checker.YELLOW)? player1: player2;
     }
 
     /**

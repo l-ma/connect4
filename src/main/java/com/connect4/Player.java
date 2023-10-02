@@ -6,20 +6,22 @@ package com.connect4;
 public class Player {
     private int playerId;
     private Checker color;
-    private PlayerType playerType;
 
     /**
      * Creates a new {@code Player} with a specified player id and CheckerType
      *
      * @param playerId the player id for the player being created
-     * @param checker the randomly-assigned checker type for the player
+     * @param checker the randomly-assigned checker type for the player (human or computer)
      */
-    public Player(int playerId, Checker checker, PlayerType playerType) {
+    public Player(int playerId, Checker checker) {
         this.playerId = playerId;
         this.color = checker;
-        this.playerType = playerType;
     }
 
+    /**
+     * Change the player's checker color
+     * @param checker checker color to be changed to
+     */
     public void changeCheckerColor(Checker checker) {
         this.color = checker;
     }
@@ -41,10 +43,10 @@ public class Player {
         return color;
     }
 
-    public PlayerType getPlayerType() {
-        return playerType;
-    }
-
+    /**
+     * Shows "Player {playerId}"
+     * @return String shows "Player {playerId}"
+     */
     @Override
     public String toString() {
         return "Player " + playerId;
