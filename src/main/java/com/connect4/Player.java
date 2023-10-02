@@ -25,13 +25,6 @@ public class Player {
     }
 
     /**
-     * Drops a checker into the board specified by the player
-     *
-     * @return an integer of column number in which the checker is dropped
-     */
-//    abstract int dropChecker();
-
-    /**
      * Gets the playerId
      * @return the id of the player
      */
@@ -48,10 +41,10 @@ public class Player {
         return color;
     }
 
-
     public PlayerType getPlayerType() {
         return playerType;
     }
+
     @Override
     public String toString() {
         return "Player " + playerId;

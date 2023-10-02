@@ -5,12 +5,12 @@ package com.connect4;
  */
 enum Checker {
     /**
-     * A red piece
+     * A red checker piece
      */
     RED,
 
     /**
-     * A yellow piece
+     * A yellow checker piece
      */
     YELLOW,
 

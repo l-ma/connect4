@@ -4,7 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Example text based client for playing Connect 4. When a human player plays, they are asked to first input an x-coordinate and then a y-coordinate for the spot they want to drop a piece into.
+ * Example text based client for playing Connect 4.
+ * When a human player plays, they are asked to input a column
+ * in which they want to drop a piece.
  */
 public class TextUI {
     private Game game;
@@ -55,15 +57,15 @@ public class TextUI {
      * Runs a game until one player wins
      */
     public void playGame() {
-        System.out.println(game.boardStatus());
+        System.out.println(game.toString());
         while (true) {
             int col = 0;
             if (game.getCurrentPlayer().getPlayerType() == PlayerType.HUMAN) {
-                System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + ": which column do you want to drop your checker?");
+                System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + ": which column do you want to drop your checker in?");
                 col = input.nextInt();
             } else if (game.getCurrentPlayer().getPlayerType() == PlayerType.COMPUTER) {
                 col = random.nextInt(7);
-                System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + " drop the checker in column " + col);
+                System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + " dropped a checker in column " + col);
             }
 
             try {
@@ -72,7 +74,7 @@ public class TextUI {
                 System.out.println(e.getMessage());
                 continue;
             }
-            System.out.println(game.boardStatus());
+            System.out.println(game.boardToString());
             if (game.hasWinner() || game.isBoardFull()) {
                 if (game.hasWinner()) {
                     System.out.println("Congrats! " + game.getWinner() + " has won!");
@@ -80,7 +82,7 @@ public class TextUI {
                 if (game.isBoardFull()) {
                     System.out.println("The board is full. No one won.");
                 }
-                System.out.println(game.toString());
+                System.out.println(game.boardToString());
                 System.out.println("Game finishing...");
                 System.out.println("Play again? [Y/N]: ");
                 String restart = readString();

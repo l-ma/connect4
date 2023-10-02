@@ -1,7 +1,9 @@
 package com.connect4;
 
 /**
- * Represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries to make a straight line (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid. A randomly-chosen player plays first, with players alternating thereafter. If the same players play multiple games in a row, they generally take turns playing first.
+ * Represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries to make a straight line
+ * (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid.
+ * A randomly-chosen player plays first, with players alternating thereafter.
  */
 public class Game {
     private Player player1;
@@ -11,7 +13,7 @@ public class Game {
     private Board board;
 
     /**
-     * Creates a new instance of a Connect 4 Game
+     * Creates a new instance of a Connect 4 Game.
      *
      * @param p1 the type of the first player (human or computer)
      * @param p2 the type of the second player (human or computer)
@@ -31,12 +33,11 @@ public class Game {
     }
 
     /**
-     * Drops a checker in the specified column.
-     *
-     * Column number starts form 0. For example, the first column of the board should be indexed as 0.
+     * Drops a checker in the specified column. Columns are numbered,
+     * starting from the very leftmost, from 0 to 6, inclusive.
      *
      * @param column the column number in which the checker will be dropped
-     * @throws RuntimeException if the column number is not within the board boundary or the column is already full,
+     * @throws RuntimeException if the column number is not within the board boundary or the column is already full
      */
     public void dropChecker(int column) {
         int row;
@@ -58,9 +59,8 @@ public class Game {
     }
 
     /**
-     * Checks if a player has won the game.
-     *
-     * A user will win the game when making a straight line (vertical, horizontal, or diagonal) of four of their colored checker.
+     * Checks if a player has won the game. A user will win the game when making a straight
+     * line (vertical, horizontal, or diagonal) with four of their colored checkers.
      *
      * @return true if either player has successfully won the game
      */
@@ -72,7 +72,7 @@ public class Game {
     }
 
     /**
-     * Check if there is a winner at a specific coorindate
+     * Check if there is a winner at a specific coorindate.
      * 
      * @param x the x-coordinate of the spot to be checked
      * @param y the y-coordinate of the spot to be checked
@@ -82,12 +82,18 @@ public class Game {
         return board.hasWinner(x, y);
     }
 
+    /**
+     * Check if the board is full of checkers.
+     *
+     * @return true if the board has no open spaces, false otherwise
+     */
     public boolean isBoardFull() {
         return board.isBoardFull();
     }
 
     /**
-     * Ends the current round and restart a round for the same players
+     * Ends the current round and starts a new round for the same players. The board is cleared
+     * and checker colors may change, but the players are kept the same.
      */
     public void newRound() {
         winner = null;
@@ -118,18 +124,28 @@ public class Game {
      * @return the winning player
      * @throws RuntimeException if there is no winner
      */
-    public Player getWinner() {if (winner != null) {
-            return winner;
+    public Player getWinner() {
+        if (winner == null) {
+            throw new RuntimeException("There is no winner yet");
         }
-        throw new RuntimeException("There is no winner yet");
+        return winner;
     }
 
-
-    public String boardStatus() {
+    /**
+     * Returns just the board as a string with no extra information about the game.
+     *
+     * @return string representation of the board
+     */
+    public String boardToString() {
         return board.toString();
     }
 
 
+    /**
+     * Displays the board with extra information about the game.
+     *
+     * @return striing representation of the board with accompanying information about the game
+     */
     @Override
     public String toString() {
         String res = "Board status: \n" + board.toString() + "\n";
@@ -138,7 +154,7 @@ public class Game {
         if (winner != null) {
             res += "Winner is " + winner + ".";
         } else {
-            res += "Now is " + turn + " turn.";
+            res += "It is " + turn + "'s turn.";
         }
         return res;
     }
