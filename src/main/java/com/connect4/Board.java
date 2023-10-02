@@ -7,6 +7,7 @@ class Board {
     private static final int NUM_ROW = 6;
 
     private static final int NUM_COL = 7;
+
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
 
     /**
@@ -138,8 +139,9 @@ class Board {
     }
 
     /**
-     * Checks if the board is full already
-     * @return true if the board is full already
+     * Check if the board is full of checkers.
+     *
+     * @return true if the board has no open spaces, false otherwise
      */
     public boolean isBoardFull() {
         for (int i = 0; i < NUM_COL; i++) {

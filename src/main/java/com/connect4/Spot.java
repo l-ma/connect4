@@ -21,7 +21,7 @@ class Spot {
     }
 
     /**
-     * Updates checker type of the spot
+     * Updates the checker type of the spot.
      *
      * @param checker The type of checker to be updated
      */

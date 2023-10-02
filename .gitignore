@@ -24,6 +24,7 @@ hs_err_pid*
 
 target/
 html/
+otherTeamConnect4/
 .idea/
 .vscode/
 .DS_Store

@@ -1,9 +1,9 @@
 package com.connect4;
 
 /**
- * Represents an instance of a Connect 4 game.
- * Connect 4 is a two-player game where each player tries to make a straight line (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid.
- * The player with yellow checker plays first. The two players take turns playing until one of them wins, or the board is full.
+ * Represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries to make a straight line
+ * (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid.
+ * A randomly-chosen player plays first, with players alternating thereafter.
  */
 public class Game {
     private Player player1;
@@ -13,7 +13,7 @@ public class Game {
     private Board board;
 
     /**
-     * Creates a new instance of a Connect 4 Game
+     * Creates a new instance of a Connect 4 Game.
      *
      * @param player1Type the type of the first player (human or computer)
      * @param player2Type the type of the second player (human or computer)
@@ -29,9 +29,8 @@ public class Game {
     }
 
     /**
-     * Lets current turn player drop a checker in the specified column.
-     *
-     * Column number starts form 0. For example, the first column of the board should be indexed as 0.
+     * Drops a checker in the specified column. Columns are numbered,
+     * starting from the very leftmost, from 0 to 6, inclusive.
      *
      * @param column the column number in which the checker will be dropped
      * @throws RuntimeException if the column number is not within the board boundary or the column is already full
@@ -87,9 +86,8 @@ public class Game {
     }
 
     /**
-     * Checks if a player has won the game.
-     *
-     * A user will win the game when making a straight line (vertical, horizontal, or diagonal) of four of their colored checker.
+     * Checks if a player has won the game. A user will win the game when making a straight
+     * line (vertical, horizontal, or diagonal) with four of their colored checkers.
      *
      * @return true if either player has successfully won the game
      */
@@ -101,8 +99,9 @@ public class Game {
     }
 
     /**
-     * Checks if the board is already full
-     * @return true if the board is already full
+     * Check if the board is full of checkers.
+     *
+     * @return true if the board has no open spaces, false otherwise
      */
     public boolean isBoardFull() {
         return board.isBoardFull();
@@ -121,8 +120,8 @@ public class Game {
     }
 
     /**
-     * Ends the current round and restarts a new round for the same players.
-     * In the new round, the player who starts first might be different.
+     * Ends the current round and starts a new round for the same players. The board is cleared
+     * and checker colors may change, but the players are kept the same.
      */
     public void newRound() {
         winner = null;
@@ -135,17 +134,18 @@ public class Game {
     }
 
     /**
-     * Shows the board status
-     * @return String that shows the board status
+     * Returns just the board as a string with no extra information about the game.
+     *
+     * @return string representation of the board
      */
-    public String boardStatus() {
+    public String boardToString() {
         return board.toString();
     }
 
     /**
-     * It shows the board status, players' representing colors, and the current game status (winner or current turn).
+     * Displays the board with extra information about the game.
      *
-     * @return String contains the board status, players' representing colors, and the current game status
+     * @return striing representation of the board with accompanying information about the game
      */
     @Override
     public String toString() {
@@ -155,7 +155,7 @@ public class Game {
         if (winner != null) {
             res += "Winner is " + winner + ".";
         } else {
-            res += "Now is " + turn + " turn.";
+            res += "It is " + turn + "'s turn.";
         }
         return res;
     }
