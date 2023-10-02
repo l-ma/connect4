@@ -19,8 +19,8 @@ public class Game {
     public Game(PlayerType p1, PlayerType p2) {
         Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
         Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
-        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1, color1) : new Computer(1, color1);
-        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2, color2) : new Computer(2, color2);
+        this.player1 = new Player(1, color1, p1);
+        this.player2 = new Player(2, color2, p2);
         this.turn = (color1 == Checker.YELLOW)? this.player1: this.player2;
         this.winner = null;
         this.board = new Board();

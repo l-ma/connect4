@@ -3,9 +3,10 @@ package com.connect4;
 /**
  * Represents a player in Connect 4.
  */
-public abstract class Player {
+public class Player {
     private int playerId;
     private Checker color;
+    private PlayerType playerType;
 
     /**
      * Creates a new {@code Player} with a specified player id and CheckerType
@@ -13,9 +14,10 @@ public abstract class Player {
      * @param playerId the player id for the player being created
      * @param checker the randomly-assigned checker type for the player
      */
-    public Player(int playerId, Checker checker) {
+    public Player(int playerId, Checker checker, PlayerType playerType) {
         this.playerId = playerId;
         this.color = checker;
+        this.playerType = playerType;
     }
 
     public void changeCheckerColor(Checker checker) {
@@ -27,7 +29,7 @@ public abstract class Player {
      *
      * @return an integer of column number in which the checker is dropped
      */
-    abstract int dropChecker();
+//    abstract int dropChecker();
 
     /**
      * Gets the playerId
@@ -44,6 +46,11 @@ public abstract class Player {
      */
     public Checker getCheckerColor() {
         return color;
+    }
+
+
+    public PlayerType getPlayerType() {
+        return playerType;
     }
     @Override
     public String toString() {
