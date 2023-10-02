@@ -17,9 +17,11 @@ public class Game {
      * @param p2 the type of the second player (human or computer)
      */
     public Game(PlayerType p1, PlayerType p2) {
-        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1) : new Computer(1);
-        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2) : new Computer(2);
-        this.turn = (System.currentTimeMillis() % 2 == 1) ? this.player1 : this.player2;
+        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
+        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
+        this.player1 = (p1 == PlayerType.HUMAN) ? new Human(1, color1) : new Computer(1, color1);
+        this.player2 = (p2 == PlayerType.HUMAN) ? new Human(2, color2) : new Computer(2, color2);
+        this.turn = (color1 == Checker.YELLOW)? this.player1: this.player2;
         this.winner = null;
         this.board = new Board();
     }
@@ -29,31 +31,42 @@ public class Game {
     }
 
     /**
-     * Drops a checker in the specified position
+     * Drops a checker in the specified column.
      *
-     * @param x the x-coordinate of the spot where the checker will be dropped
-     * @param y the y-coordinate of the spot where the checker will be dropped
+     * Column number starts form 0. For example, the first column of the board should be indexed as 0.
+     *
+     * @param column the column number in which the checker will be dropped
+     * @throws RuntimeException if the column number is not within the board boundary or the column is already full,
      */
-    public void dropChecker(int x, int y) {
-        board.dropChecker(x, y, turn.getCheckerColor());
-        if (hasWinner(x, y)) {
+    public void dropChecker(int column) {
+        int row;
+        // Check if the column is within the boundary and find the first empty row of this column
+        if (column < 0 || column >= board.getNumOfCols()) {
+            throw new RuntimeException("Not a valid column. It is not within the boundary of the board.");
+        } else {
+            row = board.firstEmptyRow(column);
+        }
+        // Check if the column is full
+        if (row == -1) {
+            throw new RuntimeException("This column already full.");
+        }
+        board.dropChecker(row, column, turn.getCheckerColor());
+        if (hasWinner(row, column)) {
             winner = turn;
         }
         changeTurn();
     }
 
     /**
-     * Checks if a player has won the game
+     * Checks if a player has won the game.
+     *
+     * A user will win the game when making a straight line (vertical, horizontal, or diagonal) of four of their colored checker.
      *
      * @return true if either player has successfully won the game
      */
     public boolean hasWinner() {
-        for (int x = 0; x < board.getNumOfRows(); x++) {
-            for (int y = 0; y < board.getNumOfCols(); y++) {
-                if (hasWinner(x, y)) {
-                    return true;
-                }
-            }
+        if (winner != null) {
+            return true;
         }
         return false;
     }
@@ -65,16 +78,25 @@ public class Game {
      * @param y the y-coordinate of the spot to be checked
      * @return true if either player has successfully won the game
      */
-    public boolean hasWinner(int x, int y) {
+    private boolean hasWinner(int x, int y) {
         return board.hasWinner(x, y);
     }
 
+    public boolean isBoardFull() {
+        return board.isBoardFull();
+    }
+
     /**
-     * Ends the current game, but is ready for another round to be played
+     * Ends the current round and restart a round for the same players
      */
     public void newRound() {
         winner = null;
         board.resetBoard();
+        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
+        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
+        player1.changeCheckerColor(color1);
+        player2.changeCheckerColor(color2);
+        turn = (color1 == Checker.YELLOW)? player1: player2;
     }
 
     /**
@@ -83,7 +105,7 @@ public class Game {
      * @return the player whose move it is
      * @throws RuntimeException if there is no player whose turn it is
      */
-    public Player getTurnPlayer() {
+    public Player getCurrentPlayer() {
         if (turn == null) {
             throw new RuntimeException("There is no turn yet");
         }
@@ -96,28 +118,28 @@ public class Game {
      * @return the winning player
      * @throws RuntimeException if there is no winner
      */
-    public Player getWinner() {
-        if (hasWinner()) {
+    public Player getWinner() {if (winner != null) {
             return winner;
         }
         throw new RuntimeException("There is no winner yet");
     }
 
-    /**
-     * Gets the id for the player who has won the game
-     *
-     * @return the id of the winning player
-     * @throws RuntimeException if there is no winner
-     */
-    public int getWinnerId() {
-        if (getWinner() == null) {
-            throw new RuntimeException("There is no winner yet");
-        }
-        return winner.getPlayerId();
+
+    public String boardStatus() {
+        return board.toString();
     }
+
 
     @Override
     public String toString() {
-        return board.toString();
+        String res = "Board status: \n" + board.toString() + "\n";
+        res += "Player 1 checker color: " + player1.getCheckerColor() + "\n";
+        res += "Player 2 checker color: " + player2.getCheckerColor() + "\n";
+        if (winner != null) {
+            res += "Winner is " + winner + ".";
+        } else {
+            res += "Now is " + turn + " turn.";
+        }
+        return res;
     }
 }

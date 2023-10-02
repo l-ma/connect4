@@ -21,17 +21,12 @@ class Spot {
     }
 
     /**
-     * Updates this spot when a checker is dropped into it
+     * Updates checker type of the spot
      *
-     * @param checker The type of checker dropped in
-     * @return true is the update succeeded, false otherwise
+     * @param checker The type of checker to be updated
      */
-    public boolean updateSpot(Checker checker) {
-        if (checker == Checker.CLEAR) {
-            return false;
-        }
+    public void updateChecker(Checker checker) {
         checkerType = checker;
-        return true;
     }
 
     /**

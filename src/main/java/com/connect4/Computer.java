@@ -7,23 +7,23 @@ import java.util.Random;
  */
 public class Computer extends Player {
     /**
-     * Creates a new {@code Computer} with a specified player id
+     * Creates a new {@code Player} with a specified player id and CheckerType
      *
      * @param playerId the player id for the player being created
+     * @param checker the randomly-assigned checker type for the player
      */
-    public Computer(int playerId) {
-        super(playerId);
+    public Computer(int playerId, Checker checker) {
+        super(playerId, checker);
     }
 
     /**
-     * Gets coordinates to drop a checker in some position on the board
+     * Gets column to drop a checker in some position on the board
      *
-     * @return int[] that contains [row, col] which are the coordinates for the drop spot
+     * @return integer of column number in which the checker is dropped
      */
-    public int[] dropChecker() {
+    public int dropChecker() {
         Random random = new Random();
-        int row = random.nextInt(6);
         int column = random.nextInt(7);
-        return new int[]{row, column};
+        return column;
     }
 }

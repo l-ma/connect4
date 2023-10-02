@@ -8,32 +8,26 @@ public abstract class Player {
     private Checker color;
 
     /**
-     * Creates a new {@code Player} with a specified player id
+     * Creates a new {@code Player} with a specified player id and CheckerType
      *
      * @param playerId the player id for the player being created
+     * @param checker the randomly-assigned checker type for the player
      */
-    public Player(int playerId) {
+    public Player(int playerId, Checker checker) {
         this.playerId = playerId;
-        this.color = (playerId == 1) ? Checker.YELLOW : Checker.RED;
+        this.color = checker;
     }
 
-    /**
-     * Creates a new {@code Player}
-     */
-    public Player() {
-        if (playerId % 2 == 0) {
-            color = Checker.RED;
-        } else {
-            color = Checker.YELLOW;
-        }
+    public void changeCheckerColor(Checker checker) {
+        this.color = checker;
     }
 
     /**
      * Drops a checker into the board specified by the player
      *
-     * @return an array containing the coordinates for the position to drop a piece
+     * @return an integer of column number in which the checker is dropped
      */
-    abstract int[] dropChecker();
+    abstract int dropChecker();
 
     /**
      * Gets the playerId
@@ -50,6 +44,10 @@ public abstract class Player {
      */
     public Checker getCheckerColor() {
         return color;
+    }
+    @Override
+    public String toString() {
+        return "Player " + playerId;
     }
 
 }
