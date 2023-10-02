@@ -1,18 +1,12 @@
 package com.connect4;
 
 /**
- * Represents a board in a game of Connect 4. Each spot in the board starts by having no checker, and as a game progresses, more spots get filled as players drop their respective checkers.
+ * Represents a board in a game of Connect 4. Each spot in the board starts by having no checker (Checker.CLEAR), and as a game progresses, more spots get filled as players drop their respective checkers.
  */
 class Board {
-    /**
-     * Number of rows in the board
-     */
-    public static final int NUM_ROW = 6;
+    private static final int NUM_ROW = 6;
 
-    /**
-     * Number of columns in the board
-     */
-    public static final int NUM_COL = 7;
+    private static final int NUM_COL = 7;
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
 
     /**
@@ -44,6 +38,7 @@ class Board {
 
         return true;
     }
+
     /**
      * To get the row number that the checker should be dropped
      *
@@ -59,24 +54,30 @@ class Board {
         return -1;
     }
 
-    private Spot getSpot(int x, int y) {
-        return board[x][y];
+    /**
+     * Gets the spot at specific row and column on the board
+     * @param row the row that the spot is located
+     * @param column the column that the spot is located
+     * @return Spot the spot at specific row and column on the board
+     */
+    private Spot getSpot(int row, int column) {
+        return board[row][column];
     }
 
     /**
-     * Checks if there is a winning checker configuration at a specific position in the board
+     * Checks if there is a winner after dropping a checker at specific spot
      *
-     * @param x the x-coordinate of the potential winning configuration
-     * @param y the x-coordinate of the potential winning configuration
-     * @return true if there is a winning configuration, false otherwise
+     * @param row the row number of the spot to be dropped
+     * @param column the column number of the spot to be dropped
+     * @return true if either player has successfully won the game
      */
-    public boolean hasWinner(int x, int y) {
-        Spot droppedSpot = getSpot(x,y);
+    public boolean hasWinner(int row, int column) {
+        Spot droppedSpot = getSpot(row,column);
         Checker checker = droppedSpot.getCheckerType();
         // Check for horizontal win
         int count = 0;
-        for (int col = Math.max(0, y - 3); col <= Math.min(NUM_COL - 1, y + 3); col++) {
-            if (checker != Checker.CLEAR && getSpot(x, col).getCheckerType() == checker) {
+        for (int i = Math.max(0, column - 3); i <= Math.min(NUM_COL - 1, column + 3); i++) {
+            if (checker != Checker.CLEAR && getSpot(row, i).getCheckerType() == checker) {
                 count++;
                 if (count == 4) {
                     return true;
@@ -88,8 +89,8 @@ class Board {
 
         // Check for vertical win
         count = 0;
-        for (int row = Math.max(0, x - 3); row <= Math.min(NUM_ROW - 1, x + 3); row++) {
-            if (checker != Checker.CLEAR && getSpot(row, y).getCheckerType() == checker) {
+        for (int i = Math.max(0, row - 3); i <= Math.min(NUM_ROW - 1, row + 3); i++) {
+            if (checker != Checker.CLEAR && getSpot(i, column).getCheckerType() == checker) {
                 count++;
                 if (count == 4) {
                     return true;
@@ -101,12 +102,12 @@ class Board {
 
         // Check for diagonal win (from top-left to bottom-right)
         count = 0;
-        int rowStart = Math.max(0, x - 3);
-        int colStart = Math.max(0, y - 3);
-        int rowEnd = Math.min(NUM_ROW - 1, x + 3);
-        int colEnd = Math.min(NUM_COL - 1, y + 3);
-        for (int row = rowStart, col = colStart; row <= rowEnd && col <= colEnd; row++, col++) {
-            if (checker != Checker.CLEAR && getSpot(x, col).getCheckerType() == checker) {
+        int rowStart = Math.max(0, row - 3);
+        int colStart = Math.max(0, column - 3);
+        int rowEnd = Math.min(NUM_ROW - 1, row + 3);
+        int colEnd = Math.min(NUM_COL - 1, column + 3);
+        for (int i = rowStart, col = colStart; i <= rowEnd && col <= colEnd; i++, col++) {
+            if (checker != Checker.CLEAR && getSpot(i, col).getCheckerType() == checker) {
                 count++;
                 if (count == 4) {
                     return true;
@@ -118,12 +119,12 @@ class Board {
 
         // Check for diagonal win (from top-right to bottom-left)
         count = 0;
-        rowStart = Math.max(0, x - 3);
-        colStart = Math.min(NUM_COL - 1, y + 3);
-        rowEnd = Math.min(NUM_ROW - 1, x + 3);
-        colEnd = Math.max(0, y - 3);
-        for (int row = rowStart, col = colStart; row <= rowEnd && col >= colEnd; row++, col--) {
-            if (checker != Checker.CLEAR && getSpot(x, col).getCheckerType() == checker) {
+        rowStart = Math.max(0, row - 3);
+        colStart = Math.min(NUM_COL - 1, column + 3);
+        rowEnd = Math.min(NUM_ROW - 1, row + 3);
+        colEnd = Math.max(0, column - 3);
+        for (int i = rowStart, col = colStart; i <= rowEnd && col >= colEnd; i++, col--) {
+            if (checker != Checker.CLEAR && getSpot(i, col).getCheckerType() == checker) {
                 count++;
                 if (count == 4) {
                     return true;
@@ -136,6 +137,10 @@ class Board {
         return false;
     }
 
+    /**
+     * Checks if the board is full already
+     * @return true if the board is full already
+     */
     public boolean isBoardFull() {
         for (int i = 0; i < NUM_COL; i++) {
             if (board[0][i].getCheckerType() == Checker.CLEAR) {
@@ -144,6 +149,7 @@ class Board {
         }
         return true;
     }
+
     /**
      * Resets the board by removing all checkers currently dropped
      */
@@ -174,8 +180,10 @@ class Board {
         return NUM_COL;
     }
 
-
-
+    /**
+     * It shows the board status (6 x 7 grid with checkers dropped)
+     * @return String that shows the board status
+     */
     @Override
     public String toString() {
         String result = "";
