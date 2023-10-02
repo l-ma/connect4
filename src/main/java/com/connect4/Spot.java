@@ -9,7 +9,7 @@ class Spot {
     private Checker checkerType;
 
     /**
-     * Creates new instance of a Spot. When created, a spot does not have a piece in it
+     * Creates new instance of a Spot. When created, a spot does not have a piece in it.
      *
      * @param x the x-coordinate of the new spot
      * @param y the y-coordinate of the new spot
@@ -21,7 +21,7 @@ class Spot {
     }
 
     /**
-     * Updates checker type of the spot
+     * Updates the checker type of the spot.
      *
      * @param checker The type of checker to be updated
      */

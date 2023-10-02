@@ -1,7 +1,8 @@
 package com.connect4;
 
 /**
- * Represents a board in a game of Connect 4. Each spot in the board starts by having no checker, and as a game progresses, more spots get filled as players drop their respective checkers.
+ * Represents a board in a game of Connect 4. Each spot in the board starts by having
+ * no checker, and as a game progresses, more spots get filled as players drop their respective checkers.
  */
 class Board {
     /**
@@ -13,6 +14,7 @@ class Board {
      * Number of columns in the board
      */
     public static final int NUM_COL = 7;
+
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
 
     /**
@@ -136,6 +138,11 @@ class Board {
         return false;
     }
 
+    /**
+     * Check if the board is full of checkers.
+     *
+     * @return true if the board has no open spaces, false otherwise
+     */
     public boolean isBoardFull() {
         for (int i = 0; i < NUM_COL; i++) {
             if (board[0][i].getCheckerType() == Checker.CLEAR) {
