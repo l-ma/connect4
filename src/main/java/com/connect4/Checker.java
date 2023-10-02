@@ -1,7 +1,7 @@
 package com.connect4;
 
 /**
- * Represents a checker piece in Connect 4. Checkers for the two players are either red or yellow.
+ * Represents a checker in Connect 4. Checkers for the two players are either red or yellow.
  */
 enum Checker {
     /**

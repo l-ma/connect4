@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Example text based client for playing Connect 4. When a human player plays, they are asked to first input an x-coordinate and then a y-coordinate for the spot they want to drop a piece into.
+ * Example text based client for playing Connect 4. When a human player plays, they are asked to input the row number for the spot they want to drop a checker into.
  */
 public class TextUI {
     private Game game;
@@ -18,6 +18,9 @@ public class TextUI {
         beginGame();
     }
 
+    /**
+     * Begins the game by asking player types of player1 and player2
+     */
     private void beginGame() {
         String p1 = "human";
         String p2 = "human";
@@ -26,7 +29,6 @@ public class TextUI {
             p1 = readString();
             if (!(p1.equals("human") || p1.equals("computer"))) {
                 System.out.println("Not a valid input, player must be a human or computer. Please try again.");
-                continue;
             } else {
                 break;
             }
@@ -36,23 +38,26 @@ public class TextUI {
             p2 = readString();
             if (!(p2.toLowerCase().equals("human") || p2.toLowerCase().equals("computer"))) {
                 System.out.println("Not a valid input, player must be a human or computer. Please try again.");
-                continue;
             } else {
                 break;
             }
         }
-        PlayerType player1 = p1.equals("human") ? PlayerType.HUMAN : PlayerType.COMPUTER;
-        PlayerType player2 = p2.equals("human") ? PlayerType.HUMAN : PlayerType.COMPUTER;
+        PlayerType player1 = p1.toLowerCase().equals("human") ? PlayerType.HUMAN : PlayerType.COMPUTER;
+        PlayerType player2 = p2.toLowerCase().equals("human") ? PlayerType.HUMAN : PlayerType.COMPUTER;
         game = new Game(player1, player2);
     }
 
+    /**
+     * Helper method to read users' input
+     * @return String that is trimmed
+     */
     private String readString() {
         String response = sc.nextLine().trim();
         return response;
     }
 
     /**
-     * Runs a game until one player wins
+     * Runs a game until one player wins or the board is full
      */
     public void playGame() {
         System.out.println(game.boardStatus());

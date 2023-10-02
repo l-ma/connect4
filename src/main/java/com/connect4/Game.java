@@ -29,7 +29,7 @@ public class Game {
     }
 
     /**
-     * Drops a checker in the specified column.
+     * Lets current turn player drop a checker in the specified column.
      *
      * Column number starts form 0. For example, the first column of the board should be indexed as 0.
      *
