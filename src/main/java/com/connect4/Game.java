@@ -13,7 +13,7 @@ public class Game {
     private Board board;
 
     /**
-     * Creates a new instance of a Connect 4 Game
+     * Creates a new instance of a Connect 4 Game.
      *
      * @param p1 the type of the first player (human or computer)
      * @param p2 the type of the second player (human or computer)
