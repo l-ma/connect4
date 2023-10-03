@@ -1,7 +1,8 @@
 package com.connect4;
 
 /**
- * Represents a board in a game of Connect 4. Each spot in the board starts by having no checker (Checker.CLEAR), and as a game progresses, more spots get filled as players drop their respective checkers.
+ * This class represents a board in a game of Connect 4. Each spot in the board starts by having
+ * no checker in it. As a game progresses, spots get filled as players drop their respective checkers.
  */
 class Board {
     private static final int NUM_ROW = 6;
@@ -11,7 +12,7 @@ class Board {
     private Spot[][] board = new Spot[NUM_ROW][NUM_COL];
 
     /**
-     * Creates a new instance of a Connect 4 {@code Board}
+     * Creates a new instance of a Connect 4 Board.
      */
     public Board() {
         for (int i = 0; i < NUM_ROW; i++) {
@@ -22,7 +23,7 @@ class Board {
     }
 
     /**
-     * Drops a checker into the board
+     * Drops a checker into the board.
      *
      * @param row row number in which the checker will be dropped
      * @param column column number in which the checker will be dropped
@@ -41,10 +42,10 @@ class Board {
     }
 
     /**
-     * To get the row number that the checker should be dropped
+     * Gets the row number where the checker should be dropped.
      *
-     * @param column the number of column in which the checker will be dropped
-     * @return int row number that a checker should be dropped. Return -1 if this column is full.
+     * @param column the column number in which the checker will be dropped
+     * @return the row number where the checker should be dropped. Returns -1 if the column is full.
      */
     public int firstEmptyRow(int column) {
         for (int row = board.length - 1; row >= 0; row--) {
@@ -56,20 +57,21 @@ class Board {
     }
 
     /**
-     * Gets the spot at specific row and column on the board
-     * @param row the row that the spot is located
-     * @param column the column that the spot is located
-     * @return Spot the spot at specific row and column on the board
+     * Gets the spot at specific row and column on the board.
+     *
+     * @param row the row that the spot is located at
+     * @param column the column that the spot is located at
+     * @return the spot at the specific row and column on the board
      */
     private Spot getSpot(int row, int column) {
         return board[row][column];
     }
 
     /**
-     * Checks if there is a winner after dropping a checker at specific spot
+     * Checks if there is a winner at a specific spot.
      *
-     * @param row the row number of the spot to be dropped
-     * @param column the column number of the spot to be dropped
+     * @param row the row number of the spot
+     * @param column the column number of the spot
      * @return true if either player has successfully won the game
      */
     public boolean hasWinner(int row, int column) {
@@ -139,7 +141,7 @@ class Board {
     }
 
     /**
-     * Check if the board is full of checkers.
+     * Checks if the board is full of checkers.
      *
      * @return true if the board has no open spaces, false otherwise
      */
@@ -153,7 +155,7 @@ class Board {
     }
 
     /**
-     * Resets the board by removing all checkers currently dropped
+     * Resets the board so that all spaces are clear.
      */
     public void resetBoard() {
         for (int i = 0; i < NUM_ROW; i++) {
@@ -165,7 +167,7 @@ class Board {
     }
 
     /**
-     * Gets the number of rows on the board
+     * Gets the number of rows on the board.
      *
      * @return number of rows
      */
@@ -174,7 +176,7 @@ class Board {
     }
 
     /**
-     * Gets the number of columns on the board
+     * Gets the number of columns on the board.
      *
      * @return number of columns
      */
@@ -183,8 +185,10 @@ class Board {
     }
 
     /**
-     * It shows the board status (6 x 7 grid with checkers dropped)
-     * @return String that shows the board status
+     * String representation of the board showing the spots where
+     * checkers have been dropped.
+     *
+     * @return the board status
      */
     @Override
     public String toString() {
