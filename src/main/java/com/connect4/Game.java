@@ -1,9 +1,9 @@
 package com.connect4;
 
 /**
- * Represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries to make a straight line
- * (vertical, horizontal, or diagonal) of four of their colored checkers by dropping their checkers into a 6 x 7 grid.
- * A randomly-chosen player plays first, with players alternating thereafter.
+ * This class represents an instance of a Connect 4 game. Connect 4 is a two-player game where each player tries
+ * to make a straight line (vertical, horizontal, or diagonal) of four of their colored checkers by dropping
+ * their checkers into a 6 x 7 grid. A randomly-chosen player plays first, with players alternating thereafter.
  */
 public class Game {
     private Player player1;
@@ -15,8 +15,8 @@ public class Game {
     /**
      * Creates a new instance of a Connect 4 Game.
      *
-     * @param player1Type the type of the first player (human or computer)
-     * @param player2Type the type of the second player (human or computer)
+     * @param player1Type the type of the first player
+     * @param player2Type the type of the second player
      */
     public Game(PlayerType player1Type, PlayerType player2Type) {
         Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
@@ -55,14 +55,14 @@ public class Game {
     }
 
     /**
-     * Helper method to change the current turn status after one player drop the checker
+     * Change the current turn status after one player drop the checker.
      */
     private void changeTurn() {
         turn = (turn == player1) ? player2 : player1;
     }
 
     /**
-     * Helper method to check if there is a winner after dropping a checker at specific spot
+     * Check if there is a winner at a specific spot.
      *
      * @param row the row number of the spot to be dropped
      * @param column the column number of the spot to be dropped
@@ -73,7 +73,7 @@ public class Game {
     }
 
     /**
-     * Gets the player whose turn it currently is
+     * Returns the player whose turn it currently is.
      *
      * @return the player whose turn it is
      * @throws RuntimeException if there is no player whose turn it is
@@ -86,7 +86,7 @@ public class Game {
     }
 
     /**
-     * Checks if a player has won the game. A user will win the game when making a straight
+     * Checks if a player has won the game. A player wins the game by making a straight
      * line (vertical, horizontal, or diagonal) with four of their colored checkers.
      *
      * @return true if either player has successfully won the game
@@ -99,7 +99,7 @@ public class Game {
     }
 
     /**
-     * Check if the board is full of checkers.
+     * Checks if the board is full of checkers.
      *
      * @return true if the board has no open spaces, false otherwise
      */
@@ -108,7 +108,7 @@ public class Game {
     }
 
     /**
-     * Gets the player who has won the game
+     * Gets the player who has won the game.
      *
      * @return the winning player
      * @throws RuntimeException if there is no winner
@@ -120,17 +120,12 @@ public class Game {
     }
 
     /**
-     * Ends the current round and starts a new round for the same players. The board is cleared
-     * and checker colors may change, but the players are kept the same.
+     * Ends the current round and starts a new round for the same players. The board is cleared,
+     * and whichever player played last in the previous game goes second in the next game.
      */
     public void newRound() {
         winner = null;
         board.resetBoard();
-        Checker color1 = (System.currentTimeMillis() % 2 == 1) ? Checker.YELLOW : Checker.RED;
-        Checker color2 = (color1 == Checker.YELLOW)? Checker.RED: Checker.YELLOW;
-        player1.changeCheckerColor(color1);
-        player2.changeCheckerColor(color2);
-        turn = (color1 == Checker.YELLOW)? player1: player2;
     }
 
     /**
@@ -143,9 +138,9 @@ public class Game {
     }
 
     /**
-     * Displays the board with extra information about the game.
+     * Returns the board with extra information about the game.
      *
-     * @return striing representation of the board with accompanying information about the game
+     * @return string representation of the board with accompanying information about the game
      */
     @Override
     public String toString() {
