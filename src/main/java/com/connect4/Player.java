@@ -46,7 +46,7 @@ public class Player {
      *
      * @return the color for the player
      */
-    protected Checker getChecker() {
+    Checker getChecker() {
         return color;
     }
 
