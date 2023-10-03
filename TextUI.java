@@ -65,10 +65,10 @@ public class TextUI {
         System.out.println(game.toString());
         while (true) {
             int col = 0;
-            if (game.getCurrentPlayer().getPlayerType() == PlayerType.HUMAN) {
+            if (game.getCurrentPlayerType() == PlayerType.HUMAN) {
                 System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + ": which column do you want to drop your checker in?");
                 col = input.nextInt();
-            } else if (game.getCurrentPlayer().getPlayerType() == PlayerType.COMPUTER) {
+            } else {
                 col = random.nextInt(7);
                 System.out.println("Player " + game.getCurrentPlayer().getPlayerId() + " dropped a checker in column " + col);
             }

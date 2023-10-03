@@ -86,6 +86,19 @@ public class Game {
     }
 
     /**
+     * Returns the type of player whose turn it currently is.
+     *
+     * @return the type player whose turn it is
+     * @throws RuntimeException if there is no player whose turn it is
+     */
+    PlayerType getCurrentPlayerType() {
+        if (turn == null) {
+            throw new RuntimeException("There is no turn yet");
+        }
+        return turn.getPlayerType();
+    }
+
+    /**
      * Checks if a player has won the game. A player wins the game by making a straight
      * line (vertical, horizontal, or diagonal) with four of their colored checkers.
      *
