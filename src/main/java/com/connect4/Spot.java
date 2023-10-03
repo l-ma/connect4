@@ -9,10 +9,10 @@ class Spot {
     private Checker checkerType;
 
     /**
-     * Creates new instance of a Spot. When created, a spot does not have a checker in it (checkerType = Checker.CLEAR)
+     * Creates new instance of a Spot. When created, a spot does not have a checker in it.
      *
-     * @param row the row number of the new spot on the board
-     * @param column the column number of the new spot on the board
+     * @param row the row of the new spot on the board
+     * @param column the column of the new spot on the board
      */
     public Spot(int row, int column) {
         this.row = row;
@@ -39,7 +39,7 @@ class Spot {
     }
 
     /**
-     * Gets the type of checker in this spot (e.g. yellow, red, clear)
+     * Gets the type of checker in this spot.
      *
      * @return the type of checker
      */
@@ -48,8 +48,9 @@ class Spot {
     }
 
     /**
-     * It shows the checker color of the spot.
-     * @return String that shows the checker color of the spot
+     * Shows the status of each spot.
+     *
+     * @return A string representation of the spot.
      */
     @Override
     public String toString() {
