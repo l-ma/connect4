@@ -42,7 +42,16 @@ public class Player {
      *
      * @return the color for the player
      */
-    public Checker getCheckerColor() {
+    public String getCheckerColor() {
+        return color.toString();
+    }
+
+    /**
+     * Gets the color of the pieces for this player
+     *
+     * @return the color for the player
+     */
+    Checker getChecker() {
         return color;
     }
 

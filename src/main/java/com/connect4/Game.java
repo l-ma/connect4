@@ -47,7 +47,7 @@ public class Game {
         if (row == -1) {
             throw new RuntimeException("This column already full.");
         }
-        board.dropChecker(row, column, turn.getCheckerColor());
+        board.dropChecker(row, column, turn.getChecker());
         if (hasWinner(row, column)) {
             winner = turn;
         }
